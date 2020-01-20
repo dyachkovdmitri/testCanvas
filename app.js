@@ -28,8 +28,10 @@ function main() {
 
 function init() {
     initContext();
-    addUnit(1, "green", 100, 100);
-    moveTo(1, 200, 280);
+
+    moveTo(1, 800, 800);
+    addUnit(2, "gray", 100, 100, 40);
+    addUnit(1, "green", 100, 100, 40);
 
     // document.getElementById('play-again').addEventListener('click', function() {
     //     reset();
@@ -43,7 +45,8 @@ function init() {
 function update(dt) {
     gameTime += dt;
     handleInput(dt);
-    renderMoving()
+    renderMoving();
+
     // updateEntities(dt);
     //
     // // It gets harder over time by adding enemies using this
@@ -67,25 +70,26 @@ function renderMoving() {
     canvas.getObjects().forEach(
         it => {
             if (canvasContext.destinations.get(it.id) != null) {
-
-
                 var objectX = it.left;
                 var objectY = it.top;
-                var destinationX = canvasContext.destinations.get(it.id)[0]
-                var destinationY = canvasContext.destinations.get(it.id)[1]
-
-                if (destinationX > objectX) {
+                var destinationX = canvasContext.destinations.get(it.id)[0];
+                var destinationY = canvasContext.destinations.get(it.id)[1];
+                console.log(!intersectsAll(it.radius, it.left + 1, it.top))
+                if (destinationX > objectX && !intersectsAll(it.radius, it.left + 1, it.top)) {
+                    console.log(!intersectsAll(it.radius, it.left + 1, it.top))
                     it.left = objectX + 1
                     //  console.log(rect.get('left'));
-                } else if (destinationX < objectX) {
+                } else if (destinationX < objectX && !intersectsAll(it.radius, it.left - 1, it.top)) {
+                    console.log(!intersectsAll(it.radius, it.left - 1, it.top))
                     it.set('left', objectX - 1)
                 }
-                if (destinationY > objectY) {
+                if (destinationY > objectY && !intersectsAll(it.radius, it.left, it.top + 1)) {
                     it.set('top', objectY + 1)
-                } else if (destinationY < objectY) {
+                } else if (destinationY < objectY && !intersectsAll(it.radius, it.left, it.top - 1)) {
                     it.set('top', objectY - 1)
                 }
-                if (objectX - destinationX < 1 && objectY - destinationY < 1 && objectX - destinationX >-1 && objectY - destinationY >-1) {
+
+                if (objectX - destinationX < 1 && objectY - destinationY < 1 && objectX - destinationX > -1 && objectY - destinationY > -1) {
                     canvasContext.destinations.delete(it.id);
                 }
 
@@ -94,6 +98,25 @@ function renderMoving() {
             }
 
         })
+
+
+}
+
+function intersect(r1, x1, y1, r2, x2, y2) {
+    if  (((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)){console.log("INTERSECT")}
+    return ((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)
+
+}
+
+function intersectsAll(r1, x1, y1) {
+    var result = false;
+    canvas.getObjects().forEach(it => {
+        if (it.id != 1) {
+            var isi = intersect(r1, x1, y1, it.radius, it.left, it.top)
+            if (isi) {result= true}
+        }
+    });
+    return result;
 }
 
 

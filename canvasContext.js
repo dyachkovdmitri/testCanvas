@@ -27,13 +27,13 @@ function initContext() {
     ;
 }
 
-function addUnit(id, color, left, top) {
+function addUnit(id, color, left, top,radius) {
     var unit = new fabric.Circle({
         left: left,
         top: top,
         id: id,
         fill: color,
-        radius: 10,
+        radius: radius,
         lockMovementX: true,
         lockMovementY: true,
         lockRotation: true,

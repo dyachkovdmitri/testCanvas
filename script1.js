@@ -6,17 +6,16 @@ var rect;
 
 function startGame(){
     var canvas = new fabric.Canvas('myCanvas');
-    rect = new fabric.Rect({
+    rect = new fabric.Circle({
         left: 100,
         top: 100,
         fill: 'red',
-        width: 20,
+        radius: 20,
         height: 20,
         angle: 45
     });
     canvas.add(rect);
-    rect.set('top',200)
-    setInterval(run,300)
+    rect.set('top',200);
     rect.set('top',300)
 }
 

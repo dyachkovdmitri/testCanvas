@@ -7,7 +7,7 @@ var canvas;
 
 
 function moveTo(id, left, top) {
-    canvasContext.destinations.set(id, [left, top]);
+    canvasContext.destinations.set(id, [left-40, top-40]);
     console.log("set new dest ", left, ":", top)
 }
 
@@ -16,9 +16,7 @@ function initContext() {
     canvas.on({
         'mouse:down': function (touch) {
             moveTo(1, touch.e.x, touch.e.y)
-
         },
-
         'mouse:down:before':function (a) {
         console.log(a)
         }
@@ -29,8 +27,8 @@ function initContext() {
 
 function addUnit(id, color, left, top,radius) {
     var unit = new fabric.Circle({
-        left: left,
-        top: top,
+        left: left-radius,
+        top: top-radius,
         id: id,
         fill: color,
         radius: radius,

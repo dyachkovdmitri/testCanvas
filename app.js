@@ -32,10 +32,11 @@ function randomInt(min, max) {
 
 function init() {
     initContext();
-    for (var i = 5; i < 50; i++) {
-        addUnit(i, "green", randomInt(20, 1800), randomInt(20, 700), 5);
-        moveTo(i, 500, 500);
-    }
+   // for (var i = 5; i < 50; i++) {
+        addUnit(1, "green", 100, 100, 5);
+    moveTo(1, 100, 200);
+       // moveTo(i, 500, 500);
+    //}
     //  addUnit(1, "green", 200, 200, 20);
     //  addUnit(5, "red", 100, 200, 20);
     //  addUnit(3, "black", 200, 20, 20);

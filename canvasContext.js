@@ -5,14 +5,8 @@ var canvasContext = {
 
 var canvas;
 
-var destination = {
-  var x;
-  var
-}
-
-
 function moveTo(id, left, top) {
-    canvasContext.destinations.set(id, [left-20, top-20]);
+    canvasContext.destinations.set(id, [left-20, top-20,0]);
     console.log("set new dest ", left, ":", top)
 }
 

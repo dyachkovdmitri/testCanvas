@@ -58,7 +58,7 @@
       <workItem from="1579264272065" duration="2699000" />
       <workItem from="1579502904133" duration="18862000" />
       <workItem from="1579596442314" duration="7410000" />
-      <workItem from="1579612059581" duration="21618000" />
+      <workItem from="1579612059581" duration="23421000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1579276443811</created>
@@ -95,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579629577606</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="traectory2">
+      <created>1579702763710</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1579702763710</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,7 +126,8 @@
     <MESSAGE value="second" />
     <MESSAGE value="third" />
     <MESSAGE value="traectory" />
-    <option name="LAST_COMMIT_MESSAGE" value="traectory" />
+    <MESSAGE value="traectory2" />
+    <option name="LAST_COMMIT_MESSAGE" value="traectory2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -131,22 +139,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>110</line>
+          <line>111</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>111</line>
+          <line>112</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>114</line>
+          <line>115</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/canvasContext.js</url>
-          <line>25</line>
+          <line>19</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>

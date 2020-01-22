@@ -69,16 +69,6 @@ function tryMove(unit, changeDirection) {
 //     }
 // }
 
-function getLeftDirection(dir) {
-}
-
-function getRightDirection(dir) {
-}
-
-function initDir() {
-
-
-}
 
 
 var dirDic = {
@@ -95,11 +85,18 @@ var dirDic = {
 
 function getDirection(it) {
     var destination = canvasContext.destinations.get(it.id);
+
+
     if (destination != null) {
         var objectX = it.left;
         var objectY = it.top;
-        var destinationX = destination.x;
-        var destinationY = destination.y;
+        var destinationX = destination[0];
+        var destinationY = destination[1];
+
+        var step = destination[2]+1;
+        destination=[destinationX,destinationY,step,getDist(objectX,objectY,destinationX,destinationY)];
+        canvasContext.destinations.set(it.id, destination);
+        console.log("go to ", destination, getDist(objectX,objectY,destinationX,destinationY));
         if (objectX === destinationX && objectY > destinationY) return 0;
         if (objectX < destinationX && objectY > destinationY) return 1;
         if (objectX < destinationX && objectY === destinationY) return 2;
@@ -114,11 +111,14 @@ function getDirection(it) {
 }
 
 function intersect(r1, x1, y1, r2, x2, y2) {
-    if (((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)) {
-        console.log("INTERSECT", " ", r1, " ", x1, " ", y1, " ", r2, " ", x2, " ", y2)
-    }
+    // if (((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)) {
+    //     console.log("INTERSECT", " ", r1, " ", x1, " ", y1, " ", r2, " ", x2, " ", y2)
+    // }
     return ((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)
+}
 
+function  getDist(x1, y1, x2, y2) {
+   return  Math.sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1- y2))
 }
 
 function intersectsAll(unit) {

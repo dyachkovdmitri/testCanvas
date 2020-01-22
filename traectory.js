@@ -2,16 +2,15 @@ function getDestination(id) {
     return canvasContext.destinations.get(id);
 }
 
-function getObject(id) {
-    var result = null;
-    canvas.getObjects().forEach(it => {
-        if (it.id === id) return result = id
-    });
-    return result;
-}
+// function getObject(id) {
+//     var result = null;
+//     canvas.getObjects().forEach(it => {
+//         if (it.id === id) return result = id
+//     });
+//     return result;
+// }
 
 function moveDirect(unit, direction) {
-    console.log(direction);
     unit.left += dirDic[direction][0];
     unit.top += dirDic[direction][1];
 }
@@ -25,7 +24,6 @@ function tryMove(unit, changeDirection) {
     if (changeDirection == undefined) {
         changeDirection = 0
     } else {
-        console.log('changeDirection to ', getDirection(unit) + changeDirection)
     }
     var direction = getDirection(unit) + changeDirection;
     if (direction === 11) {
@@ -37,6 +35,9 @@ function tryMove(unit, changeDirection) {
     if (direction === 9) {
         direction = 1
     }
+    if (direction === 10) {
+        direction = 2
+    }
 
     if (direction === -1) {
         direction = 7
@@ -45,8 +46,11 @@ function tryMove(unit, changeDirection) {
     if (direction === -2) {
         direction = 6
     }
+    if (direction === -3) {
+        direction = 5
+    }
     moveDirect(unit, direction);
-    if (intersectsAll(unit.radius, unit.left, unit.top)) {
+    if (intersectsAll(unit)) {
         reverse(unit, direction);
         return false
     } else return true
@@ -90,11 +94,12 @@ var dirDic = {
 };
 
 function getDirection(it) {
-    if (canvasContext.destinations.get(it.id) != null) {
+    var destination = canvasContext.destinations.get(it.id);
+    if (destination != null) {
         var objectX = it.left;
         var objectY = it.top;
-        var destinationX = canvasContext.destinations.get(it.id)[0];
-        var destinationY = canvasContext.destinations.get(it.id)[1];
+        var destinationX = destination.x;
+        var destinationY = destination.y;
         if (objectX === destinationX && objectY > destinationY) return 0;
         if (objectX < destinationX && objectY > destinationY) return 1;
         if (objectX < destinationX && objectY === destinationY) return 2;
@@ -103,9 +108,7 @@ function getDirection(it) {
         if (objectX > destinationX && objectY < destinationY) return 5;
         if (objectX > destinationX && objectY === destinationY) return 6;
         if (objectX > destinationX && objectY > destinationY) return 7;
-        if (objectX === destinationX && objectY === destinationY) return 11
-
-
+        if (objectX === destinationX && objectY === destinationY) { canvasContext.destinations.delete(it.id); return 11}
     }
     return 11
 }
@@ -118,11 +121,12 @@ function intersect(r1, x1, y1, r2, x2, y2) {
 
 }
 
-function intersectsAll(r1, x1, y1) {
+function intersectsAll(unit) {
     var isi = false;
     canvas.getObjects().forEach(it => {
-        if (it.id != 1) {
-            if (intersect(r1, x1, y1, it.radius, it.left, it.top)) {
+        if (it.id != unit.id) {
+            console.log('check in');
+            if (intersect(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
                 isi = true
             }
         }

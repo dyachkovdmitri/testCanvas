@@ -26,11 +26,27 @@ function main() {
     requestAnimFrame(main);
 }
 
+function randomInt(min, max) {
+    return min + Math.floor((max - min) * Math.random());
+}
+
 function init() {
     initContext();
-    addUnit(1, "green", 200, 200, 20);
-    moveTo(1, 800, 800);
-    addUnit(2, "gray", 400, 400, 200);
+    for (var i = 5; i < 50; i++) {
+        addUnit(i, "green", randomInt(20, 1800), randomInt(20, 700), 5);
+        moveTo(i, 500, 500);
+    }
+    //  addUnit(1, "green", 200, 200, 20);
+    //  addUnit(5, "red", 100, 200, 20);
+    //  addUnit(3, "black", 200, 20, 20);
+    //  addUnit(4, "blue", 100, 100, 20);
+    //
+    //
+    //  moveTo(1, 800, 800);
+    //  moveTo(5, 800, 800);
+    //  moveTo(3, 100, 800);
+    //  moveTo(4, 800, 800);
+    //  addUnit(2, "gray", 400, 400, 200);
 
 
     // document.getElementById('play-again').addEventListener('click', function() {
@@ -71,9 +87,13 @@ function renderMoving() {
         it => {
             if (!tryMove(it)) {
                 if (!tryMove(it, 1)) {
-                    if(!tryMove(it, 2)){
-                        if(!tryMove(it, -1)){
-                            tryMove(it, -2)
+                    if (!tryMove(it, 2)) {
+                        if (!tryMove(it, 3)) {
+                            if (!tryMove(it, -1)) {
+                                if (tryMove(it, -2)) {
+                                    tryMove(it, -3)
+                                }
+                            }
                         }
                     }
                 }

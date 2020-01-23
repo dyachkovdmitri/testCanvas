@@ -1,14 +1,3 @@
-function getDestination(id) {
-    return canvasContext.destinations.get(id);
-}
-
-// function getObject(id) {
-//     var result = null;
-//     canvas.getObjects().forEach(it => {
-//         if (it.id === id) return result = id
-//     });
-//     return result;
-// }
 
 function moveDirect(unit, direction) {
     unit.left += dirDic[direction][0];
@@ -21,12 +10,12 @@ function reverse(unit, direction) {
 }
 
 function tryMove(unit, changeDirection) {
-    if (changeDirection == undefined) {
+    if (changeDirection === undefined) {
         changeDirection = 0
     } else {
     }
     var direction = getDirection(unit) + changeDirection;
-    if (direction === 11) {
+    if (direction>10) {
         return true
     }
     if (direction === 8) {
@@ -57,20 +46,6 @@ function tryMove(unit, changeDirection) {
 }
 
 
-// function moveDirect2(id, direction) {
-//     var unit = getObject(id);
-//     moveDirect(unit, direction);
-//     var object = intersectsAll(unit.radius, unit.left, unit.top);
-//     if (object != null) {
-//         if (direction === 7) {
-//             direction = -1
-//         }
-//         moveDirect2(id, direction + 1);
-//     }
-// }
-
-
-
 var dirDic = {
     0: [0, -1],
     1: [1, -1],
@@ -86,17 +61,26 @@ var dirDic = {
 function getDirection(it) {
     var destination = canvasContext.destinations.get(it.id);
 
-
     if (destination != null) {
         var objectX = it.left;
         var objectY = it.top;
         var destinationX = destination[0];
         var destinationY = destination[1];
 
-        var step = destination[2]+1;
-        destination=[destinationX,destinationY,step,getDist(objectX,objectY,destinationX,destinationY)];
+        var step = destination[2] + 1;
+        var realDist = getDist(objectX, objectY, destinationX, destinationY);
+        var oldDist = destination[3];
+        destination = [destinationX, destinationY, step, oldDist];
+        if (step % 100 === 0) {
+            if (Math.abs(realDist - oldDist) < 2) {
+                canvasContext.destinations.delete(it.id);
+                it.fill = 'red';
+                return 11;
+            }
+            destination = [destinationX, destinationY, step, realDist];
+        }
         canvasContext.destinations.set(it.id, destination);
-        console.log("go to ", destination, getDist(objectX,objectY,destinationX,destinationY));
+        //console.log("go to ", destination, getDist(objectX, objectY, destinationX, destinationY));
         if (objectX === destinationX && objectY > destinationY) return 0;
         if (objectX < destinationX && objectY > destinationY) return 1;
         if (objectX < destinationX && objectY === destinationY) return 2;
@@ -105,7 +89,10 @@ function getDirection(it) {
         if (objectX > destinationX && objectY < destinationY) return 5;
         if (objectX > destinationX && objectY === destinationY) return 6;
         if (objectX > destinationX && objectY > destinationY) return 7;
-        if (objectX === destinationX && objectY === destinationY) { canvasContext.destinations.delete(it.id); return 11}
+        if (objectX === destinationX && objectY === destinationY) {
+            canvasContext.destinations.delete(it.id);
+            return 11
+        }
     }
     return 11
 }
@@ -117,15 +104,15 @@ function intersect(r1, x1, y1, r2, x2, y2) {
     return ((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)
 }
 
-function  getDist(x1, y1, x2, y2) {
-   return  Math.sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1- y2))
+function getDist(x1, y1, x2, y2) {
+    return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
 }
 
 function intersectsAll(unit) {
     var isi = false;
     canvas.getObjects().forEach(it => {
         if (it.id != unit.id) {
-            console.log('check in');
+       //     console.log('check in');
             if (intersect(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
                 isi = true
             }

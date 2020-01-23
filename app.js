@@ -30,12 +30,17 @@ function randomInt(min, max) {
     return min + Math.floor((max - min) * Math.random());
 }
 
+
 function init() {
     initContext();
-   // for (var i = 5; i < 50; i++) {
-        addUnit(1, "green", 100, 100, 5);
-    moveTo(1, 100, 200);
-       // moveTo(i, 500, 500);
+    nature.createRocks(4,43,100);
+    nature.createTrees(10,100, 30);
+    for (var i = 5; i < 1000; i++) {
+        addUnit(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2,5));
+        moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
+    }
+
+    // moveTo(i, 500, 500);
     //}
     //  addUnit(1, "green", 200, 200, 20);
     //  addUnit(5, "red", 100, 200, 20);

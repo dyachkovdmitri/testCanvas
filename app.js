@@ -33,10 +33,10 @@ function randomInt(min, max) {
 
 function init() {
     initContext();
-    nature.createRocks(4,43,100);
-    nature.createTrees(10,100, 30);
-    for (var i = 5; i < 1000; i++) {
-        addUnit(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2,5));
+    // nature.createRocks(4, 43, 100);
+    // nature.createTrees(10, 100, 30);
+    for (var i = 5; i <40; i++) {
+        addUnit(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 5));
         moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
     }
 
@@ -91,22 +91,35 @@ function renderMoving() {
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
         it => {
-            if (!tryMove(it)) {
-                if (!tryMove(it, 1)) {
-                    if (!tryMove(it, 2)) {
-                        if (!tryMove(it, 3)) {
-                            if (!tryMove(it, -1)) {
-                                if (tryMove(it, -2)) {
-                                    tryMove(it, -3)
+            if (it.id > 4 && it.id < 50) {
+                if (!tryMove(it)) {
+                    if (!tryMove(it, 1)) {
+                        if (!tryMove(it, 2)) {
+                            if (!tryMove(it, 3)) {
+                                if (!tryMove(it, -1)) {
+                                    if (tryMove(it, -2)) {
+                                        tryMove(it, -3)
+                                    }
                                 }
                             }
                         }
                     }
                 }
+               // console.log("UNIT SELECTED11111", it.id, it.left, it.top, selectionField);
+                if (it.left > selectionField[0] && it.left < selectionField[2] && it.top > selectionField[1] && it.top < selectionField[3])
+                    it.set('stroke', 'red');
+                    console.log("UNIT SELECTED", it);
             }
+
         })
 }
 
+
+function selectObjects(unit) {
+    console.log("TOP", unit.left, unit.top, selectionField)
+    if (unit.left > selectionField[0] && unit.left < selectionField[2] && unit.top < selectionField[1] && unit.top > selectionField[3])
+        console.log("UNIT SELECTED");
+}
 
 function render() {
     // ctx.fillStyle = terrainPattern;

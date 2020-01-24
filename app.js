@@ -12,6 +12,7 @@ var requestAnimFrame = (function () {
 var canvas;
 var rect;
 var gameTime = 0;
+var tact =0;
 
 
 // Speed in pixels per second
@@ -33,12 +34,14 @@ function randomInt(min, max) {
 
 function init() {
     initContext();
+
+   // writeSector(200,200,100,80,80);
     // nature.createRocks(4, 43, 100);
     // nature.createTrees(10, 100, 30);
-    for (var i = 5; i <40; i++) {
-        addUnit(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 5));
-        moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
-    }
+    // for (var i = 5; i <40; i++) {
+    //     addUnit(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 5));
+    //     moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
+    // }
 
     // moveTo(i, 500, 500);
     //}
@@ -88,6 +91,8 @@ function update(dt) {
 }
 
 function renderMoving() {
+    tact++;
+
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
         it => {

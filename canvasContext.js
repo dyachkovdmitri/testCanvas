@@ -33,8 +33,9 @@ function initContext() {
             },
 
             'mouse:down': function (a) {
-                addSelection(a.pointer.x, a.pointer.y, 20, 20)
-                // addSelection(200, 200)
+                canvas.clear();
+                //addSelection(a.pointer.x, a.pointer.y, 20, 20)
+                writeSector(300,300,150,a.pointer.x,a.pointer.y,6)
             },
             'mouse:up': function (a) {
                 canvas.remove(selection);
@@ -59,7 +60,7 @@ function initContext() {
                     top = selectionY+a.pointer.y
                 }
                 selectionField=[left,top,right,bottom];
-                console.log(selectionField);
+               // console.log(selectionField);
             },
             'mouse:move': function (a) {
 
@@ -107,7 +108,6 @@ function initContext() {
 }
 
 function addUnit(id, color, left, top, radius, intersects) {
-
     var unit = new fabric.Circle({
         left: left,
         top: top,
@@ -127,7 +127,7 @@ function addUnit(id, color, left, top, radius, intersects) {
     // });
     while (true) {
         if (!intersects && intersectsAll(unit)) {
-            console.log("intersect!");
+
             unit.left += radius * 2;
         } else break;
     }

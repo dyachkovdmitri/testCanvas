@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fa530661-b9ec-44f4-9b15-99faf2f25e5e" name="Default Changelist" comment="traectory2">
-      <change afterPath="$PROJECT_DIR$/shoot.js" afterDir="false" />
+    <list default="true" id="fa530661-b9ec-44f4-9b15-99faf2f25e5e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/canvasContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/canvasContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shoot.js" beforeDir="false" afterPath="$PROJECT_DIR$/shoot.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +75,7 @@
       <workItem from="1579612059581" duration="23421000" />
       <workItem from="1579759742404" duration="18020000" />
       <workItem from="1579848008087" duration="14153000" />
-      <workItem from="1579874305974" duration="9000" />
+      <workItem from="1579874305974" duration="2867000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1579276443811</created>
@@ -122,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579702763710</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="shooting">
+      <created>1579874332946</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1579874332946</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,7 +165,8 @@
     <MESSAGE value="third" />
     <MESSAGE value="traectory" />
     <MESSAGE value="traectory2" />
-    <option name="LAST_COMMIT_MESSAGE" value="traectory2" />
+    <MESSAGE value="shooting" />
+    <option name="LAST_COMMIT_MESSAGE" value="shooting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -180,6 +185,12 @@
           <url>file://$PROJECT_DIR$/app.js</url>
           <line>138</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/shoot.js</url>
+          <line>18</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

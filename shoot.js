@@ -4,7 +4,7 @@ function writeCircle(xc, yc, r, sinus, righter, rp) {//todo universal sinus for 
         x = Math.sqrt(r * r - (y - yc) * (y - yc)) + xc;
         let x2 = xc - Math.sqrt(r * r - (y - yc) * (y - yc));
 
-        if (Math.abs(sinus - sin(xc, yc, x, y)) < 0.2) {
+        if (Math.abs(sinus - sin(xc, yc, x, y)) < 0.1) {
             if (righter) {
                 traectories.push(x,y)
             //    laser(xc, yc, x, y, rp);

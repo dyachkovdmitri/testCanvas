@@ -35,6 +35,9 @@ function randomInt(min, max) {
 function init() {
     initContext();
 
+    addUnit(21, "green", 100, 100, 4);
+    addUnit(900, "blue", 500, 500, 5);
+
    // writeSector(200,200,100,80,80);
     // nature.createRocks(4, 43, 100);
     // nature.createTrees(10, 100, 30);
@@ -92,7 +95,6 @@ function update(dt) {
 
 function renderMoving() {
     tact++;
-
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
         it => {
@@ -113,7 +115,7 @@ function renderMoving() {
                // console.log("UNIT SELECTED11111", it.id, it.left, it.top, selectionField);
                 if (it.left > selectionField[0] && it.left < selectionField[2] && it.top > selectionField[1] && it.top < selectionField[3])
                     it.set('stroke', 'red');
-                    console.log("UNIT SELECTED", it);
+                    //console.log("UNIT SELECTED", it);
             }
 
         })

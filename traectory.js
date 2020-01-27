@@ -39,6 +39,13 @@ function tryMove(unit, changeDirection) {
         direction = 5
     }
     moveDirect(unit, direction);
+    let enemy = enemyInRange(unit);
+    if(enemy!=null){
+        console.log(unit.fill);
+        shoot(unit,200, enemy.left,enemy.top);
+    }
+
+    console.log("go");
     if (intersectsAll(unit)) {
         reverse(unit, direction);
         return false
@@ -98,21 +105,36 @@ function getDirection(it) {
 }
 
 function intersect(r1, x1, y1, r2, x2, y2) {
-    // if (((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)) {
-    //     console.log("INTERSECT", " ", r1, " ", x1, " ", y1, " ", r2, " ", x2, " ", y2)
-    // }
     return ((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)
+}
+
+function inRange(r1, x1, y1, r2, x2, y2) {
+    return ((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < 200*200
 }
 
 function getDist(x1, y1, x2, y2) {
     return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
 }
 
+function enemyInRange(unit) {
+    var isi = null;
+    canvas.getObjects().forEach(it => {
+        if (it.id != unit.id) {
+            if (inRange(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
+                if(it.fill==="blue"){
+                console.log("ENEMY");//todo break;
+
+                isi = it;}
+            }
+        }
+    });
+    return isi;
+}
+
 function intersectsAll(unit) {
     var isi = false;
     canvas.getObjects().forEach(it => {
         if (it.id != unit.id) {
-       //     console.log('check in');
             if (intersect(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
                 isi = true
             }

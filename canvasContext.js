@@ -21,21 +21,21 @@ function initContext() {
     canvas.selection = false;
     canvas.on({
             'mouse:dblclick': function (touch) {
-                addUnit(8000, "blue", touch.pointer.x, touch.pointer.y, 1);
-                for (var i = 0; i < 200; i++) {
-                    moveTo(i, touch.pointer.x, touch.pointer.y);
+                addUnit(8000, "red", touch.pointer.x, touch.pointer.y, 1);
+               // for (var i = 0; i < 21; i++) {
+                    moveTo(21, touch.pointer.x, touch.pointer.y);
                  //   console.log(touch);
 
-                }
+            //    }
             },
             'mouse:down:before': function (a) {
                 //    console.log(a)
             },
 
             'mouse:down': function (a) {
-                canvas.clear();
+              //  canvas.clear();
                 //addSelection(a.pointer.x, a.pointer.y, 20, 20)
-                writeSector(300,300,150,a.pointer.x,a.pointer.y,6)
+                //writeSector(300,300,150,a.pointer.x,a.pointer.y,6)
             },
             'mouse:up': function (a) {
                 canvas.remove(selection);
@@ -51,7 +51,6 @@ function initContext() {
                     right = selectionX;
                     left = a.pointer.x
                 }
-
                 if(selectionY<a.pointer.y){
                     top = selectionY;
                     bottom = selectionY+a.pointer.y
@@ -70,35 +69,7 @@ function initContext() {
                     let height = a.pointer.y - selectionY;
                     addSelection(selectionX, selectionY, width, height);
                     document.getElementById("des2").innerText = width;
-                    // let left;
-                    // let right;
-                    // let top;
-                    // let bottom;
-                    // if(width>0){left = selectionX;
-                    //     right = selectionX+width
-                    // } else {
-                    //     right = selectionX;
-                    //     left = selectionX+width
-                    // }
-                    //
-                    // if(height>0){top = selectionY;
-                    //     bottom = selectionY+top
-                    // } else {
-                    //     bottom = selectionY;
-                    //     top = selectionY+top
-                    // }
-                    // selectionField=[left,right,top,bottom];
-                    // console.log(selectionField);
-                    //canvas.renderAll();
-                    //     console.log(selection.get('left'));
-                    //     selection.animate('left', a.pointer.x, { onChange: canvas.renderAll.bind(canvas) });
-                    // selection.left =  Math.floor(a.pointer.x);
-                    // selection.top =  Math.floor(a.pointer.y);
-                    //selection.top = a.pointer.y;
-
-                    //   console.log(selection.left);} else  console.log("EROOR")
-
-                }
+                   }
             }
 
 
@@ -112,8 +83,7 @@ function addUnit(id, color, left, top, radius, intersects) {
         left: left,
         top: top,
         id: id,
-        // originX: 'center',
-        // originY: 'center',
+        lastShoot:tact,
         fill: color,
         radius: radius,
         lockMovementX: true,
@@ -123,8 +93,6 @@ function addUnit(id, color, left, top, radius, intersects) {
         lockScalingX: true
     });
     unit.hasControls = false;
-    // rect.on('selected', function () {
-    // });
     while (true) {
         if (!intersects && intersectsAll(unit)) {
 
@@ -145,19 +113,8 @@ function addSelection(left, top, width, height) {
         width: width,
         height: height,
         fill: "green",
-        // stroke:"black",
-        // opacity:0.3,
-        //strokeWidth : 1,
-        // lockMovementX: true,
-        // lockMovementY: true,
-        // lockRotation: true
-        // lockScalingY: true,
-        // lockScalingX: true
     });
-    // selection.hasControls = false;
     selectionX = left;
     selectionY = top;
-    // rect.on('selected', function () {
-    // });
     canvas.add(selection);
 }

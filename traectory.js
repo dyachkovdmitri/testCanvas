@@ -41,15 +41,17 @@ function tryMove(unit, changeDirection) {
     moveDirect(unit, direction);
     let enemy = enemyInRange(unit);
     if(enemy!=null){
-        console.log(unit.fill);
-        shoot(unit,200, enemy.left,enemy.top);
+       console.log(unit.id, " shoot");
+        if(shoot(unit,200, enemy.left,enemy.top)){
+          //  canvas.remove(enemy);
+        }
     }
 
-    console.log("go");
+   // console.log("go");
     if (intersectsAll(unit)) {
         reverse(unit, direction);
-        return false
-    } else return true
+        return false;
+    } else return true;
 }
 
 
@@ -122,7 +124,7 @@ function enemyInRange(unit) {
         if (it.id != unit.id) {
             if (inRange(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
                 if(it.fill==="blue"){
-                console.log("ENEMY");//todo break;
+             //   console.log("ENEMY");//todo break;
 
                 isi = it;}
             }
@@ -137,6 +139,18 @@ function intersectsAll(unit) {
         if (it.id != unit.id) {
             if (intersect(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
                 isi = true
+            }
+        }
+    });
+    return isi;
+}
+
+function intersectWith(unit) {
+    var isi = null;
+    canvas.getObjects().forEach(it => {
+        if (it.id != unit.id) {
+            if (intersect(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
+                isi = it
             }
         }
     });

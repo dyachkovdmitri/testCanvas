@@ -21,9 +21,9 @@ function initContext() {
     canvas.selection = false;
     canvas.on({
             'mouse:dblclick': function (touch) {
-                addUnit(8000, "red", touch.pointer.x, touch.pointer.y, 1);
-               // for (var i = 0; i < 21; i++) {
-                    moveTo(21, touch.pointer.x, touch.pointer.y);
+               // addUnit(8000, "red", touch.pointer.x, touch.pointer.y, 1);
+                for (id in selectedUnits) {
+                    moveTo(id, touch.pointer.x, touch.pointer.y);}
                  //   console.log(touch);
 
             //    }
@@ -34,7 +34,7 @@ function initContext() {
 
             'mouse:down': function (a) {
               //  canvas.clear();
-                //addSelection(a.pointer.x, a.pointer.y, 20, 20)
+                addSelection(a.pointer.x, a.pointer.y, 20, 20)
                 //writeSector(300,300,150,a.pointer.x,a.pointer.y,6)
             },
             'mouse:up': function (a) {

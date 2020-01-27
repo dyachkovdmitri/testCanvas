@@ -35,12 +35,20 @@ function randomInt(min, max) {
 function init() {
     initContext();
 
-    addUnit(21, "green", 100, 100, 4);
+    addUnit(3, "green", 100, 100, 4);
+    addUnit(4, "green", 109, 100, 4);
+    addUnit(5, "green", 100, 100, 4);
+    addUnit(6, "green", 109, 100, 4);
+    addUnit(7, "green", 100, 100, 4);
+    addUnit(8, "green", 109, 100, 4);
+    addUnit(9, "green", 100, 100, 4);
+    addUnit(10, "green", 109, 100, 4);
+
     addUnit(900, "blue", 500, 500, 5);
 
    // writeSector(200,200,100,80,80);
-    // nature.createRocks(4, 43, 100);
-    // nature.createTrees(10, 100, 30);
+    nature.createRocks(4, 43, 100);
+    nature.createTrees(10, 100, 30);
     // for (var i = 5; i <40; i++) {
     //     addUnit(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 5));
     //     moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
@@ -98,7 +106,7 @@ function renderMoving() {
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
         it => {
-            if (it.id > 4 && it.id < 50) {
+            if (it.id > 0 && it.id < 50) {
                 if (!tryMove(it)) {
                     if (!tryMove(it, 1)) {
                         if (!tryMove(it, 2)) {
@@ -113,19 +121,11 @@ function renderMoving() {
                     }
                 }
                // console.log("UNIT SELECTED11111", it.id, it.left, it.top, selectionField);
-                if (it.left > selectionField[0] && it.left < selectionField[2] && it.top > selectionField[1] && it.top < selectionField[3])
-                    it.set('stroke', 'red');
+               select(it)
                     //console.log("UNIT SELECTED", it);
             }
 
         })
-}
-
-
-function selectObjects(unit) {
-    console.log("TOP", unit.left, unit.top, selectionField)
-    if (unit.left > selectionField[0] && unit.left < selectionField[2] && unit.top < selectionField[1] && unit.top > selectionField[3])
-        console.log("UNIT SELECTED");
 }
 
 function render() {

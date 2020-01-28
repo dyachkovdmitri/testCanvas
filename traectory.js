@@ -9,6 +9,31 @@ function reverse(unit, direction) {
     unit.top += -dirDic[direction][1];
 }
 
+
+function moveUnit(it) {
+    if (it.id > 0 && it.id < 50) {
+        if (!tryMove(it)) {
+            if (!tryMove(it, 1)) {
+                if (!tryMove(it, 2)) {
+                    if (!tryMove(it, 3)) {
+                        if (!tryMove(it, -1)) {
+                            if (tryMove(it, -2)) {
+                                tryMove(it, -3)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // console.log("UNIT SELECTED11111", it.id, it.left, it.top, selectionField);
+        select(it)
+        //console.log("UNIT SELECTED", it);
+    }
+
+}
+
+
+
 function tryMove(unit, changeDirection) {
     if (changeDirection === undefined) {
         changeDirection = 0
@@ -83,7 +108,8 @@ function getDirection(it) {
         if (step % 100 === 0) {
             if (Math.abs(realDist - oldDist) < 2) {
                 canvasContext.destinations.delete(it.id);
-                it.fill = 'red';
+                console.log('losted');
+               // it.fill = 'red';
                 return 11;
             }
             destination = [destinationX, destinationY, step, realDist];

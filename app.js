@@ -12,7 +12,7 @@ var requestAnimFrame = (function () {
 var canvas;
 var rect;
 var gameTime = 0;
-var tact =0;
+var tact = 0;
 
 
 // Speed in pixels per second
@@ -46,7 +46,7 @@ function init() {
 
     addUnit(900, "blue", 500, 500, 5);
 
-   // writeSector(200,200,100,80,80);
+    // writeSector(200,200,100,80,80);
     nature.createRocks(4, 43, 100);
     nature.createTrees(10, 100, 30);
     // for (var i = 5; i <40; i++) {
@@ -67,13 +67,6 @@ function init() {
     //  moveTo(3, 100, 800);
     //  moveTo(4, 800, 800);
     //  addUnit(2, "gray", 400, 400, 200);
-
-
-    // document.getElementById('play-again').addEventListener('click', function() {
-    //     reset();
-    // });
-
-    //  reset();
     lastTime = Date.now();
     main();
 }
@@ -82,68 +75,19 @@ function update(dt) {
     gameTime += dt;
     handleInput(dt);
     renderMoving();
-
-    // updateEntities(dt);
-    //
-    // // It gets harder over time by adding enemies using this
-    // // equation: 1-.993^gameTime
-    // if(Math.random() < 1 - Math.pow(.993, gameTime)) {
-    //     enemies.push({
-    //         pos: [canvas.width,
-    //             Math.random() * (canvas.height - 39)],
-    //         sprite: new Sprite('img/sprites.png', [0, 78], [80, 39],
-    //             6, [0, 1, 2, 3, 2, 1])
-    //     });
-    // }
-
-    // checkCollisions();
-
-    //   scoreEl.innerHTML = score;
 }
 
 function renderMoving() {
     tact++;
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
-        it => {
-            if (it.id > 0 && it.id < 50) {
-                if (!tryMove(it)) {
-                    if (!tryMove(it, 1)) {
-                        if (!tryMove(it, 2)) {
-                            if (!tryMove(it, 3)) {
-                                if (!tryMove(it, -1)) {
-                                    if (tryMove(it, -2)) {
-                                        tryMove(it, -3)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-               // console.log("UNIT SELECTED11111", it.id, it.left, it.top, selectionField);
-               select(it)
-                    //console.log("UNIT SELECTED", it);
-            }
-
-        })
+        it => moveUnit(it));
+    selectionField = [0, 0, 0, 0]
 }
 
 function render() {
-    // ctx.fillStyle = terrainPattern;
-    //  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Render the player if the game isn't over
-    //      renderEntity(player);
-    //   i+=1;
-    //   rect.set('left',i);
-    //   console.log(i);
     canvas.renderAll();
-    //canvas.renderAndResetBound();
 
-
-//     renderEntities(bullets);
-// renderEntities(enemies);
-// renderEntities(explosions);
 }
 
 function handleInput(dt) {

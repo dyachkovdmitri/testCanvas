@@ -66,7 +66,6 @@ function tryMove(unit, changeDirection) {
     moveDirect(unit, direction);
     let enemy = enemyInRange(unit);
     if(enemy!=null){
-       console.log(unit.id, " shoot");
         if(shoot(unit,200, enemy.left,enemy.top)){
           //  canvas.remove(enemy);
         }

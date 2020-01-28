@@ -34,7 +34,7 @@ function randomInt(min, max) {
 
 function init() {
     initContext();
-    createRiver(5, 10, 120);
+
 
     // addUnit(3, "green", 100, 100, 4);
     // addUnit(4, "green", 109, 100, 4);
@@ -49,11 +49,12 @@ function init() {
 
     // writeSector(200,200,100,80,80);
     // nature.createRocks(4, 43, 100);
+    // nature.createRiver(5, 30, 120);
     // nature.createTrees(10, 100, 30);
-    // for (var i = 5; i <40; i++) {
-    //     addUnit(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 5));
-    //     moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
-    // }
+    for (var i = 0; i <10; i++) {
+        work(addWorker(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2,8)));
+        //moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
+    }
 
     lastTime = Date.now();
     main();
@@ -69,7 +70,9 @@ function renderMoving() {
     tact++;
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
-        it => moveUnit(it));
+        it => {moveUnit(it);
+        it.set('angle',tact*20);
+        console.log(it.angle)});
     selectionField = [0, 0, 0, 0]
 }
 

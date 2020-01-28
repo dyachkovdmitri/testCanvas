@@ -25,7 +25,7 @@ function sin(xc, yc, x1, y1) {
 }
 
 function shoot(unit, r, x1, y1) {
-    if (tact - unit.lastShoot > 30) {
+    if (tact - unit.lastShoot > 10&&tact - unit.lastShoot<12) {
         deleteLaser()
     }//todo only if laser exists
     if (tact - unit.lastShoot > 50) {

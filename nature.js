@@ -27,25 +27,35 @@ let nature = {
     createRiver(bend, width, length) {
         var firstPoint;
         if (randomInt(0, 10) % 2 === 0) {
-            firstPoint = addUnit(2000, "blue", 0, randomInt(0, 800), randomInt(width / 2, width));
+            firstPoint = addUnit(2000, "blue", 800, 402, randomInt(width / 3, width));
         } else {
-            firstPoint = addUnit(2000, "blue", randomInt(0, 1700), 0, randomInt(width / 2, width));
+            firstPoint = addUnit(2000, "blue", randomInt(0, 1700), 0, randomInt(width / 3, width));
         }
         var radius = randomInt(width / 2, width);
-
+        var prevX = firstPoint.left;
+        var prevY = firstPoint.top;
+        var dirX = randomInt(-1, 2);
+        var dirY = randomInt(-1, 2);
         for (var j = 0; j < length; j++) {
             var isBend = (randomInt(0, bend) % bend === 0);
-            var dirX = randomInt(-1,1);
-            var dirY = randomInt(-1,1);
-            if(isBend){
-                dirX = randomInt(-1,1);
-                dirY = randomInt(-1,1);
+
+            if (isBend) {
+                console.log("dir change");
+                dirX = randomInt(-1, 2);
+                dirY = randomInt(-1, 2);
             }
 
             radius = randomInt(width / 2, width);
-            addUnit(j * 100 + 2000 , "blue", prevX+radius*dirX, prevY+radius*dirY, radius);
+            prevX = prevX + radius * dirX;
+            prevY = prevY + radius * dirY;
+            console.log(radius);
+            addUnit(j * 100 + 2000, "blue", prevX, prevY, radius, true);
+
+
         }
-    }
+    },
+
+
 };
 
 

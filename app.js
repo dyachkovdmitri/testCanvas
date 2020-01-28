@@ -34,39 +34,27 @@ function randomInt(min, max) {
 
 function init() {
     initContext();
+    createRiver(5, 10, 120);
 
-    addUnit(3, "green", 100, 100, 4);
-    addUnit(4, "green", 109, 100, 4);
-    addUnit(5, "green", 100, 100, 4);
-    addUnit(6, "green", 109, 100, 4);
-    addUnit(7, "green", 100, 100, 4);
-    addUnit(8, "green", 109, 100, 4);
-    addUnit(9, "green", 100, 100, 4);
-    addUnit(10, "green", 109, 100, 4);
-
-    addUnit(900, "blue", 500, 500, 5);
+    // addUnit(3, "green", 100, 100, 4);
+    // addUnit(4, "green", 109, 100, 4);
+    // addUnit(5, "green", 100, 100, 4);
+    // addUnit(6, "green", 109, 100, 4);
+    // addUnit(7, "green", 100, 100, 4);
+    // addUnit(8, "green", 109, 100, 4);
+    // addUnit(9, "green", 100, 100, 4);
+    // addUnit(10, "green", 109, 100, 4);
+    //
+    // addUnit(900, "blue", 500, 500, 5);
 
     // writeSector(200,200,100,80,80);
-    nature.createRocks(4, 43, 100);
-    nature.createTrees(10, 100, 30);
+    // nature.createRocks(4, 43, 100);
+    // nature.createTrees(10, 100, 30);
     // for (var i = 5; i <40; i++) {
     //     addUnit(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 5));
     //     moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
     // }
 
-    // moveTo(i, 500, 500);
-    //}
-    //  addUnit(1, "green", 200, 200, 20);
-    //  addUnit(5, "red", 100, 200, 20);
-    //  addUnit(3, "black", 200, 20, 20);
-    //  addUnit(4, "blue", 100, 100, 20);
-    //
-    //
-    //  moveTo(1, 800, 800);
-    //  moveTo(5, 800, 800);
-    //  moveTo(3, 100, 800);
-    //  moveTo(4, 800, 800);
-    //  addUnit(2, "gray", 400, 400, 200);
     lastTime = Date.now();
     main();
 }

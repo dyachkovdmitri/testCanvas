@@ -48,11 +48,11 @@ function init() {
     // addUnit(900, "blue", 500, 500, 5);
 
     // writeSector(200,200,100,80,80);
-    // nature.createRocks(4, 43, 100);
+     nature.createRocks(20, 43, 2);
     // nature.createRiver(5, 30, 120);
     // nature.createTrees(10, 100, 30);
-    for (var i = 0; i <10; i++) {
-        work(addWorker(i, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2,8)));
+    for (var i = 0; i < 1; i++) {
+        work(addWorker(3, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 8)));
         //moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
     }
 
@@ -70,15 +70,17 @@ function renderMoving() {
     tact++;
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
-        it => {moveUnit(it);
-        it.set('angle',tact*20);
-        console.log(it.angle)});
+        it => {
+            moveUnit(it);
+            workUnit(it);
+            shootUnit(it);
+            attackUnit(it)
+        });
     selectionField = [0, 0, 0, 0]
 }
 
 function render() {
     canvas.renderAll();
-
 }
 
 function handleInput(dt) {

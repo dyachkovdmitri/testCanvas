@@ -22,6 +22,7 @@ function initContext() {
 
             'mouse:wheel': function (a) {
                 deselect()
+                stopWork(1);
             },
 
             'mouse:down': function (a) {

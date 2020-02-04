@@ -29,7 +29,6 @@ function moveUnit(it) {
         select(it)
         //console.log("UNIT SELECTED", it);
     }
-
 }
 
 
@@ -131,9 +130,25 @@ function getDirection(it) {
     return 11
 }
 
-function intersect(r1, x1, y1, r2, x2, y2) {
-    console.log(Math.sqrt(((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) - (r1 + r2) * (r1 + r2)))
-    return ((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)
+// function intersect(r1, x1, y1, r2, x2, y2) {
+//     console.log(Math.sqrt(((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) - (r1 + r2) * (r1 + r2)))
+//     return ((x1 + r1 - x2 - r2) * (x1 + r1 - x2 - r2) + (y1 + r1 - y2 - r2) * (y1 + r1 - y2 - r2)) < (r1 + r2) * (r1 + r2)
+// }
+
+// function intersect(r1, x1, y1, r2, x2, y2) {
+//     if( ((x1 - x2 ) * (x1 - x2) + (y1- y2) * (y1 - y2)) < (r1 + r2) * (r1 + r2)){
+//         onIntersect()ж
+//         return true;}
+//         else return false;
+//
+// }
+
+function intersect(it,unit) {
+    if( ((it.left-unit.left) * (it.left-unit.left) + (it.top-unit.top) * (it.top-unit.top)) < (it.radius+unit.radius) * (it.radius+unit.radius)){
+        return onIntersect(it,unit);
+       }
+    else return false;
+
 }
 
 function inRange(r1, x1, y1, r2, x2, y2) {
@@ -163,7 +178,8 @@ function intersectsAll(unit) {
     var isi = false;
     canvas.getObjects().forEach(it => {
         if (it.id != unit.id) {
-            if (intersect(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
+            console.log("MOVE ",unit.radius, unit.left, unit.top, it.radius, it.left, it.top);
+            if (intersect(unit,it)) {
                 isi = true
             }
         }

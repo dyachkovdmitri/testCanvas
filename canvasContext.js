@@ -2,9 +2,6 @@ var canvasContext = {
     destinations: new Map(),
     units: new Map()
 };
-
-var divShow = document.getElementById("des2");
-
 var canvas;
 
 
@@ -21,7 +18,7 @@ function initContext() {
             },
 
             'mouse:wheel': function (a) {
-                deselect()
+                deselect();
                 stopWork(1);
             },
 

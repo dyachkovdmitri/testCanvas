@@ -48,13 +48,15 @@ function init() {
     // addUnit(900, "blue", 500, 500, 5);
 
     // writeSector(200,200,100,80,80);
-     nature.createRocks(20, 43, 2);
+     nature.createRocks(10, 43, 1);
     // nature.createRiver(5, 30, 120);
     // nature.createTrees(10, 100, 30);
-    for (var i = 0; i < 1; i++) {
-        work(addWorker(3, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 8)));
-        //moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
-    }
+   // for (var i = 0; i < 10; i++) {
+        //work(addWorker(3, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 8)));
+        work(addWorker(1, "green", 100, 100, 6));
+     //   (addWorker(3, "red", 400, 400, 4));
+    //    moveTo(i, randomInt(1700, 1701), randomInt(780, 781));
+ //   }
 
     lastTime = Date.now();
     main();
@@ -71,8 +73,8 @@ function renderMoving() {
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
         it => {
-            moveUnit(it);
             workUnit(it);
+            moveUnit(it);
             shootUnit(it);
             attackUnit(it)
         });

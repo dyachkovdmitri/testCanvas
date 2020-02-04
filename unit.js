@@ -27,6 +27,8 @@ function addUnit(id, color, left, top, radius, intersects) {
         id: id,
         lastShoot: tact,
         fill: color,
+        originX: 'center',
+        originY: 'center',
         radius: radius,
         unitType: type,
         lockMovementX: true,
@@ -53,6 +55,9 @@ function addWorker(id, color, left, top, radius, intersects) {
         top: top,
         id: id,
         lastShoot: tact,
+        originX: 'center',
+        originY: 'center',
+        centeredRotation: true,
         fill: color,
         radius: radius,
         rx: radius - 2,
@@ -77,7 +82,7 @@ function addWorker(id, color, left, top, radius, intersects) {
 }
 
 function work(unit, resource) {
-    workingUnits.set(unit.id, null);
+    workingUnits.set(unit.id, resource);
 }
 
 function stopWork(id) {
@@ -91,20 +96,45 @@ function moveTo(id, left, top) {
 }
 
 function workUnit(it) {
+    if (it.inWork) {
+        console.log("WORK ");
+        it.set('angle', (tact % 72) * 5);
 
+        if (tact % 20 === 0) {
+            rocks++;
+            console.log(rocks);
+            let resource = workingUnits.get(it.id);
+            if (resource.radius > 0) {
+                resource.set('radius', resource.radius - 1);
+            }else {
+                it.inWork = false
+        }
+        }
+        return
+    }
     if (workingUnits.has(it.id)) {
         let resource = workingUnits.get(it.id);
-        if (resource === null) {
 
+        if (resource === null || resource == undefined) {
             resource = getNearResource(it, ROCK);
             workingUnits.set(it.id, resource);
-            console.log("res finded", resource.left, resource.top)
+            moveTo(it.id, resource.left, resource.top);
+            it.needRes = ROCK
+            //   console.log("res finded", resource.left, resource.top)
         }
-        if (intersect(it.radius, it.left, it.top, resource.radius, resource.left, resource.top)) {
-            it.set('angle', (tact % 72) * 5);//todo normal angle
-        } else moveTo(it.id, resource.left + resource.radius, resource.top + resource.radius)
 
 
+        // console.log("WORK ", it.radius, it.left, it.top, resource.radius, resource.left, resource.top);
+        // if (intersect(it.radius, it.left, it.top, resource.radius, resource.left, resource.top)) {
+        //     //     console.log("BEGIN WORK ");
+        //     //     canvasContext.destinations.delete(it.id);
+        //     //     it.set('angle', (tact % 72) * 5);//todo normal angle
+        //     // }
+        //
+        //     //else moveTo(it.id, resource.left, resource.top)
+        //
+        //
+        // }
     }
 }
 
@@ -113,7 +143,7 @@ function shootUnit(it) {
 }
 
 function getNearResource(unit, type) {
-    let res = 500;
+    let res = 1000;
     let result = null;
     canvas.getObjects().forEach(it => {
         if (it.unitType === type) {

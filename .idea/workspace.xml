@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa530661-b9ec-44f4-9b15-99faf2f25e5e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/intersection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tresuares.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/canvasContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/canvasContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/traectory.js" beforeDir="false" afterPath="$PROJECT_DIR$/traectory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unit.js" beforeDir="false" afterPath="$PROJECT_DIR$/unit.js" afterDir="false" />
     </list>
@@ -79,7 +82,12 @@
       <workItem from="1580193070095" duration="4323000" />
       <workItem from="1580206374113" duration="631000" />
       <workItem from="1580292822521" duration="1588000" />
-      <workItem from="1580307512104" duration="2309000" />
+      <workItem from="1580307512104" duration="2370000" />
+      <workItem from="1580365246373" duration="2727000" />
+      <workItem from="1580479869272" duration="1944000" />
+      <workItem from="1580716104220" duration="3910000" />
+      <workItem from="1580723346699" duration="610000" />
+      <workItem from="1580797062863" duration="2259000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1579276443811</created>
@@ -158,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580196114996</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="move and shoot">
+      <created>1580309834267</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1580309834267</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,13 +236,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/canvasContext.js</url>
-          <line>24</line>
+          <line>21</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/traectory.js</url>
-          <line>134</line>
-          <properties lambdaOrdinal="-1" />
+          <line>133</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>

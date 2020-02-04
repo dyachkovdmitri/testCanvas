@@ -48,7 +48,7 @@ function init() {
     // addUnit(900, "blue", 500, 500, 5);
 
     // writeSector(200,200,100,80,80);
-     nature.createRocks(10, 43, 1);
+     nature.createRocks(10, 43, 40);
     // nature.createRiver(5, 30, 120);
     // nature.createTrees(10, 100, 30);
    // for (var i = 0; i < 10; i++) {
@@ -73,10 +73,11 @@ function renderMoving() {
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
         it => {
+            if(it.id<900){
             workUnit(it);
             moveUnit(it);
             shootUnit(it);
-            attackUnit(it)
+            attackUnit(it)}
         });
     selectionField = [0, 0, 0, 0]
 }

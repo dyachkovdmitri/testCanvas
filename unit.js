@@ -57,7 +57,7 @@ function addWorker(id, color, left, top, radius, intersects) {
         lastShoot: tact,
         originX: 'center',
         originY: 'center',
-        centeredRotation: true,
+        // centeredRotation: true,
         fill: color,
         radius: radius,
         rx: radius - 2,
@@ -99,16 +99,20 @@ function workUnit(it) {
     if (it.inWork) {
         console.log("WORK ");
         it.set('angle', (tact % 72) * 5);
-
-        if (tact % 20 === 0) {
-            rocks++;
-            console.log(rocks);
+        if (tact % 2 === 0) {
             let resource = workingUnits.get(it.id);
-            if (resource.radius > 0) {
-                resource.set('radius', resource.radius - 1);
-            }else {
+            rocks++;
+            document.getElementById("des2").innerText = rocks;
+            let newR = Math.sqrt((3*resource.radius*resource.radius-1)/3);
+            if (newR > 0) {
+                resource.set('radius', newR);
+            } else {
+                workingUnits.delete(it.id);
+                workingUnits.set(it.id, null);
+                it.set('angle',0);
+                canvas.remove(resource);
                 it.inWork = false
-        }
+            }
         }
         return
     }

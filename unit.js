@@ -49,7 +49,7 @@ function addUnit(id, color, left, top, radius, intersects) {
     return unit;
 }
 
-function addWorker(id, color, left, top, radius, intersects) {
+function addWorker(id, color, left, top, radius) {
     var unit = new fabric.Ellipse({
         left: left,
         top: top,
@@ -71,8 +71,7 @@ function addWorker(id, color, left, top, radius, intersects) {
     });
     unit.hasControls = false;
     while (true) {
-        if (!intersects && intersectsAll(unit)) {
-
+        if (intersectsAll(unit)) {
             unit.left += radius * 2;
         } else break;
     }
@@ -91,6 +90,9 @@ function stopWork(id) {
 
 
 function moveTo(id, left, top) {
+   // getById(id);
+   //  it.inWork=false;
+   //  it.needRes=null;
     canvasContext.destinations.set(id, [left, top, 0, 0]);
     //   console.log("set new dest ", left, ":", top)
 }

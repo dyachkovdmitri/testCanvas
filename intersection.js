@@ -1,5 +1,5 @@
 function onIntersect(it, unit) {
-    if (it.needRes == unit.unitType) {
+    if (it.needRes!==undefined && it.needRes!==null&&it.needRes == unit.unitType) {
         it.inWork=true;
         canvasContext.destinations.delete(it.id);
         return false

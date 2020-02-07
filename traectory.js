@@ -15,10 +15,10 @@ function moveUnit(it) {
     if (it.id > 0 && it.id < 1000) {
         if (!tryMove(it)) {
             if (!tryMove(it, 1)) {
-                if (!tryMove(it, 2)) {
-                    if (!tryMove(it, 3)) {
-                        if (!tryMove(it, -1)) {
-                            if (tryMove(it, -2)) {
+                if (!tryMove(it, -1)) {
+                    if (!tryMove(it, 2)) {
+                        if (!tryMove(it, -2)) {
+                            if (tryMove(it, -3)) {
                                 tryMove(it, -3)
                             }
                         }

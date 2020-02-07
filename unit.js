@@ -148,7 +148,7 @@ function transportUnit(it) {
         if (it.purpose.now === "takeRes") {
             let product = getObjectById(it.purpose.id);
             if (product !== null) {
-                product.set('top', it.top - 3);
+                product.set('top', it.top - 4);
                 product.set('left', it.left);
                 it.set('angle', 90);
                 it.purpose.now = "gotoBase";

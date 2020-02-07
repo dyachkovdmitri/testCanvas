@@ -54,7 +54,7 @@ function init() {
    // for (var i = 0; i < 2; i++) {
         //work(addWorker(3, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 8)));
         //work(addWorker(1, "green", 100, 100, 6));
-        work(addWorker(1, "green", 400, 400, 5));
+    work(addWorker(1, "green", 400, 400, 5));
     work(addWorker(2, "green", 400, 400, 6));
     work(addWorker(3, "green", 400, 400, 7));
     work(addWorker(4, "green", 400, 400, 3));

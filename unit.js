@@ -7,6 +7,8 @@ var METALL = 5;
 var ENEMY = 6;
 var FRIEND = 7;
 var GRASS = 8;
+var STONE = 10;
+var WOOD = 11;
 
 
 function addUnit(id, color, left, top, radius, intersects) {
@@ -70,11 +72,7 @@ function addWorker(id, color, left, top, radius) {
         lockScalingX: true
     });
     unit.hasControls = false;
-    while (true) {
-        if (intersectsAll(unit)) {
-            unit.left += radius * 2;
-        } else break;
-    }
+    addNear(unit);
     canvas.add(unit);
     canvasContext.units.set(id, unit);
     return unit;
@@ -90,28 +88,29 @@ function stopWork(id) {
 
 
 function moveTo(id, left, top) {
-   // getById(id);
-   //  it.inWork=false;
-   //  it.needRes=null;
+    // getById(id);
+    //  it.inWork=false;
+    //  it.needRes=null;
     canvasContext.destinations.set(id, [left, top, 0, 0]);
     //   console.log("set new dest ", left, ":", top)
 }
 
 function workUnit(it) {
-    if (it.inWork) {
-        console.log("WORK ");
+    if (it.inWork === true) {
+        //   console.log("WORK ");
         it.set('angle', (tact % 72) * 5);
         if (tact % 2 === 0) {
             let resource = workingUnits.get(it.id);
-            rocks++;
-            document.getElementById("des2").innerText = rocks;
-            let newR = Math.sqrt((3*resource.radius*resource.radius-1)/3);
+            // rocks++;
+            addProduct(it);
+
+            let newR = Math.sqrt((3 * resource.radius * resource.radius - 1) / 3);
             if (newR > 0) {
                 resource.set('radius', newR);
             } else {
                 workingUnits.delete(it.id);
                 workingUnits.set(it.id, null);
-                it.set('angle',0);
+                it.set('angle', 0);
                 canvas.remove(resource);
                 it.inWork = false
             }
@@ -120,27 +119,18 @@ function workUnit(it) {
     }
     if (workingUnits.has(it.id)) {
         let resource = workingUnits.get(it.id);
-
-        if (resource === null || resource == undefined) {
-            resource = getNearResource(it, ROCK);
-            workingUnits.set(it.id, resource);
-            moveTo(it.id, resource.left, resource.top);
-            it.needRes = ROCK
-            //   console.log("res finded", resource.left, resource.top)
+        if (resource === null || resource === undefined) {
+            resource = getNearResource(it, ROCK);//todo hardcode ROCK
+            if (resource !== null) {
+                workingUnits.set(it.id, resource);
+                moveTo(it.id, resource.left, resource.top);
+                it.needRes = ROCK;
+            } else {
+                it.needRes == null;
+                it.inWork == null;
+                workingUnits.delete(it.id);
+            }
         }
-
-
-        // console.log("WORK ", it.radius, it.left, it.top, resource.radius, resource.left, resource.top);
-        // if (intersect(it.radius, it.left, it.top, resource.radius, resource.left, resource.top)) {
-        //     //     console.log("BEGIN WORK ");
-        //     //     canvasContext.destinations.delete(it.id);
-        //     //     it.set('angle', (tact % 72) * 5);//todo normal angle
-        //     // }
-        //
-        //     //else moveTo(it.id, resource.left, resource.top)
-        //
-        //
-        // }
     }
 }
 
@@ -148,26 +138,54 @@ function shootUnit(it) {
 
 }
 
-function getNearResource(unit, type) {
-    let res = 1000;
-    let result = null;
-    canvas.getObjects().forEach(it => {
-        if (it.unitType === type) {
-            let dist = getDist(unit.left, unit.top, it.left, it.top);
-            console.log("dist", dist);
-            if (dist < res) {
-                res = dist;
-                result = it;
-            }
-            if (dist < 10) {
-                return result;
-            }
-
-        }
-    });
-    return result;
-}
-
 function attackUnit(it) {
 
+}
+
+function transportUnit(it) {
+    console.log(it.purpose);
+    if (it.purpose !== undefined && it.purpose !== null && it.purpose.action === "transport") {
+        if (it.purpose.now === "takeRes") {
+            let product = getObjectById(it.purpose.id);
+            if (product !== null) {
+                product.set('top', it.top - 3);
+                product.set('left', it.left);
+                it.set('angle', 90);
+                it.purpose.now = "gotoBase";
+                moveTo(it.id, 100, 111)
+            }
+        } else if (it.purpose.now === "gotoBase") {
+            let product = getObjectById(it.purpose.id);
+            if (product !== null) {
+                product.set('top', it.top - 3);
+                product.set('left', it.left);
+            }
+        }
+    }
+}
+
+function addNear(unit) {
+    let n = 2;
+    let l = unit.left;
+    let t = unit.top;
+    while (true) {
+        console.log("try", unit.id);
+        n++;
+        if (intersectsAll(unit)) {
+            unit.left = l + n;
+            if (intersectsAll(unit)) {
+                unit.left = l - n;
+                if (intersectsAll(unit)) {
+                    unit.left = l;
+                    unit.top = t + n;
+                    if (intersectsAll(unit)) {
+                        unit.top = t - n;
+                        if (intersectsAll(unit)) {
+                            unit.top = t;
+                        }
+                    }
+                }
+            }
+        } else break;
+    }
 }

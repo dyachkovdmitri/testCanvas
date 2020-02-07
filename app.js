@@ -48,14 +48,20 @@ function init() {
     // addUnit(900, "blue", 500, 500, 5);
 
     // writeSector(200,200,100,80,80);
-    nature.createRocks(1, 43, 1);
+      nature.createRocks(5, 30, 50);
     // nature.createRiver(5, 30, 120);
     // nature.createTrees(10, 100, 30);
-    // for (var i = 0; i < 10; i++) {
-    //work(addWorker(3, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 8)));
-    work(addWorker(1, "green", 100, 100, 6));
-    work(addWorker(2, "green", 100, 100, 10));
-    // work(addWorker(3, "green", 100, 100, 5));
+   // for (var i = 0; i < 2; i++) {
+        //work(addWorker(3, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 8)));
+        //work(addWorker(1, "green", 100, 100, 6));
+        work(addWorker(1, "green", 400, 400, 5));
+    work(addWorker(2, "green", 400, 400, 6));
+    work(addWorker(3, "green", 400, 400, 7));
+    work(addWorker(4, "green", 400, 400, 3));
+    work(addWorker(5, "green", 400, 400, 4));
+
+  //  }
+    // addUnit(10, "green", 109, 100, 4);
     // work(addWorker(4, "green", 100, 100, 2));
 
     //   (addWorker(3, "red", 400, 400, 4));
@@ -77,11 +83,16 @@ function renderMoving() {
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
         it => {
+            try{
             if (it.id < 900) {
                 workUnit(it);
                 moveUnit(it);
+                transportUnit(it);
                 shootUnit(it);
-                attackUnit(it)
+                attackUnit(it);
+                select(it);}
+            }catch (e) {
+                console.log(e)
             }
         });
     selectionField = [0, 0, 0, 0]

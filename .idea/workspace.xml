@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa530661-b9ec-44f4-9b15-99faf2f25e5e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/constants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canvasContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/canvasContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/intersection.js" beforeDir="false" afterPath="$PROJECT_DIR$/intersection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nature.js" beforeDir="false" afterPath="$PROJECT_DIR$/nature.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/traectory.js" beforeDir="false" afterPath="$PROJECT_DIR$/traectory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tresuares.js" beforeDir="false" afterPath="$PROJECT_DIR$/tresuares.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unit.js" beforeDir="false" afterPath="$PROJECT_DIR$/unit.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,7 +92,10 @@
       <workItem from="1580723346699" duration="610000" />
       <workItem from="1580797062863" duration="7804000" />
       <workItem from="1580813957948" duration="928000" />
-      <workItem from="1580815133197" duration="130000" />
+      <workItem from="1580815133197" duration="6194000" />
+      <workItem from="1580882874387" duration="5673000" />
+      <workItem from="1580906166725" duration="4765000" />
+      <workItem from="1580988442819" duration="19485000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1579276443811</created>
@@ -185,11 +195,28 @@
       <option name="project" value="LOCAL" />
       <updated>1580802077245</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="rocks">
+      <created>1580815314852</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1580815314852</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$USER_HOME$/IdeaProjects/rts2/rts/greet2.js" />
+        <option value="$USER_HOME$/IdeaProjects/rts2/rts/Canvas.js" />
+        <option value="$USER_HOME$/IdeaProjects/rts2/rts/UnitStatus.js" />
+        <option value="$USER_HOME$/IdeaProjects/rts2/rts/Context.js" />
+        <option value="$USER_HOME$/IdeaProjects/rts2/rts/Unit.js" />
+        <option value="$USER_HOME$/IdeaProjects/rts2/rts/App.js" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -249,18 +276,14 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/canvasContext.js</url>
-          <line>21</line>
+          <line>39</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/traectory.js</url>
-          <line>133</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/unit.js</url>
-          <line>107</line>
-          <option name="timeStamp" value="18" />
+          <url>file://$PROJECT_DIR$/resource.js</url>
+          <line>14</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

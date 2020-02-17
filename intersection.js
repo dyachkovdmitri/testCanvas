@@ -11,7 +11,6 @@ function onIntersect(it, unit) {
     if (unit.unitType > 9 ) { //проверка нужен ли ресурс
         if (it.task !== null&&it.task !== undefined && unit.unitType === it.task.unitType && it.task.now!=="gotoBase") {
             it.task.now = "takeRes";
-            console.log("TAKERES", it);
             it.task.id = unit.id;
             canvasContext.destinations.delete(it.id);
         }
@@ -21,7 +20,6 @@ function onIntersect(it, unit) {
     if (it.task !== undefined && it.task !== null && it.task.unitType === unit.unitType) {
         it.task.now = "mine";
         it.task.id = unit.id;
-        console.log("MINE", it);
         canvasContext.destinations.delete(it.id);
         return false;
     }

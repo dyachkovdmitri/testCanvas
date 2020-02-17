@@ -49,8 +49,8 @@ function init() {
 
     // writeSector(200,200,100,80,80);
       nature.createRocks(9, 100, 1);
-    // nature.createRiver(5, 30, 120);
-    // nature.createTrees(10, 100, 30);
+     nature.createRiver(5, 30, 120);
+     nature.createTrees(10, 100, 30);
    // for (var i = 0; i < 2; i++) {
         //work(addWorker(3, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 8)));
         //work(addWorker(1, "green", 100, 100, 6));

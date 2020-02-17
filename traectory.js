@@ -125,7 +125,7 @@ function enemyInRange(unit) {
     canvas.getObjects().forEach(it => {
         if (it.id != unit.id) {
             if (inRange(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
-                if (it.fill === "blue") {
+                if (it.fill === "red") {
                     //   console.log("ENEMY");//todo break;
 
                     isi = it;

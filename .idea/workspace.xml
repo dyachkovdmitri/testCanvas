@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa530661-b9ec-44f4-9b15-99faf2f25e5e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/enemy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/intersection.js" beforeDir="false" afterPath="$PROJECT_DIR$/intersection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nature.js" beforeDir="false" afterPath="$PROJECT_DIR$/nature.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/traectory.js" beforeDir="false" afterPath="$PROJECT_DIR$/traectory.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -89,7 +90,7 @@
       <workItem from="1580882874387" duration="5673000" />
       <workItem from="1580906166725" duration="4765000" />
       <workItem from="1580988442819" duration="22511000" />
-      <workItem from="1581920259095" duration="21193000" />
+      <workItem from="1581920259095" duration="24947000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1579276443811</created>
@@ -224,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581949806315</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="small fixes">
+      <created>1581951523043</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1581951523043</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,7 +285,8 @@
     <MESSAGE value="move and shoot" />
     <MESSAGE value="rocks" />
     <MESSAGE value="econome" />
-    <option name="LAST_COMMIT_MESSAGE" value="econome" />
+    <MESSAGE value="small fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

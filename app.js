@@ -48,22 +48,26 @@ function init() {
     // addUnit(900, "blue", 500, 500, 5);
 
     // writeSector(200,200,100,80,80);
-      nature.createRocks(9, 100, 1);
-     nature.createRiver(5, 30, 120);
-     nature.createTrees(10, 100, 30);
-   // for (var i = 0; i < 2; i++) {
-        //work(addWorker(3, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 8)));
-        //work(addWorker(1, "green", 100, 100, 6));
+    nature.createRocks(9, 30, 10);
+    // nature.createFireRain(1);
+    nature.createRiver(5, 30, 120);
+    nature.createTrees(10, 10, 50);
+    // for (var i = 0; i < 2; i++) {
+    //work(addWorker(3, "green", randomInt(500, 600), randomInt(200, 300), randomInt(2, 8)));
+    //work(addWorker(1, "green", 100, 100, 6));
     work(addWorker(1, "green", 600, 400, 6), ROCK);
-    work(addWorker(2, "green", 400, 400, 6),ROCK);
-    work(addWorker(3, "green", 800, 400, 6),ROCK);
-   // work(addWorker(3, "green", 400, 400, 6),ROCK);
+    work(addWorker(2, "green", 400, 400, 6), ROCK);
+    work(addWorker(3, "green", 800, 400, 6), ROCK);
+    work(addWorker(4, "green", 600, 400, 6), ROCK);
+    work(addWorker(5, "green", 400, 400, 6), ROCK);
+    work(addWorker(6, "green", 800, 400, 6), ROCK);
+    // work(addWorker(3, "green", 400, 400, 6),ROCK);
     // work(addWorker(11, "green", 400, 400, 6), ROCK);
     // work(addWorker(21, "green", 400, 400, 6),ROCK);
     // work(addWorker(31, "green", 400, 400, 6),ROCK);
 
 
-  //  }
+    //  }
     // addUnit(10, "green", 109, 100, 4);
     // work(addWorker(4, "green", 100, 100, 2));
 
@@ -83,26 +87,43 @@ function update(dt) {
 
 function renderMoving() {
     tact++;
+    if (tact % 20 === 0) {
+        nature.createFireRain(23);
+    }
+
     let sum = false;
     //console.log(canvasContext.destinations);
     canvas.getObjects().forEach(
         it => {
-            try{
-            if (it.id < 900) {
-               // console.log(tact, it.task);
-                workUnit(it);
-              //  console.log(tact, it.task);
-                moveUnit(it);
-              //  console.log(tact, it.task);
-                transportUnit(it);
-                shootUnit(it);
-                attackUnit(it);
-                select(it);}
-            else if (!sum&&it.id>19999&&it.id<21001){
-             sumRes(it);
-             sum=true;
-            }
-            }catch (e) {
+            try {
+                if (it.id < 900) {
+                    // console.log(tact, it.task);
+                    workUnit(it);
+                    //  console.log(tact, it.task);
+                    moveUnit(it);
+                    //  console.log(tact, it.task);
+                    transportUnit(it);
+                    shootUnit(it);
+                    attackUnit(it);
+                    select(it);
+                } else if (!sum && it.id > 19999 && it.id < 21001) {
+                    sumRes(it);
+                    sum = true;
+                } else if (it.id === 21001) {
+                    let intersected = intersectWith(it);
+                    if (intersected != null && intersected.fill === 'gray') {
+                        canvas.remove(it)
+                    }
+                    if (intersected != null && intersected.fill === 'green') {
+                        canvas.remove(it);
+                        canvas.remove(intersected);
+                    }
+                    if (it.top > randomInt(400,4000) && it.top < randomInt(600, 700)) {
+                        canvas.remove(it);
+                    }
+                    it.set('top', it.top + 1);
+                }
+            } catch (e) {
                 console.log(e)
             }
         });

@@ -11,6 +11,14 @@ let nature = {
             }
         }
     },
+    createFireRain(number) {
+        for (let j = 0; j < number; j++) {
+            let nextLeft = randomInt(100, 200);
+            let minTop = randomInt(0, 200);
+         //   console.log(j);
+            addUnit(21001, 'orange', nextLeft, minTop,randomInt(1,3))
+        }
+    },
     createTrees(number, maxSize, density) {
         for (var j = 0; j < number; j++) {
             var size = randomInt(1, maxSize);
@@ -48,7 +56,7 @@ let nature = {
             radius = randomInt(width / 2, width);
             prevX = prevX + radius * dirX;
             prevY = prevY + radius * dirY;
-            console.log(radius);
+         //  console.log(radius);
             addUnit(j * 100 + 2000, "blue", prevX, prevY, radius, true);
 
 

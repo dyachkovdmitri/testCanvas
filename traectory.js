@@ -81,7 +81,7 @@ function getDirection(it) {
                 if (step % 100 === 0) {//степень упоротости, как долго будет пытаться идти к цели
             if (Math.abs(realDist - oldDist) < 2) {
                 canvasContext.destinations.delete(it.id);
-                console.log('losted');
+               // console.log('losted');
                 // it.fill = 'red';
                 return 11;
             }

@@ -1,20 +1,23 @@
 // var rockResources=mapOf();
 
 function addProduct(unit) {
-
     if (unit.resource !== null && unit.resource !== undefined) {
         let res = getObjectById(unit.resource);
         res.set('radius', res.radius + 0.01);
         //console.log(res.radius);
-        if(res.radius>7){
-            unit.resource=null;
-            workingUnits.delete(unit.id);
-            unit.inWork = false;
-            unit.set('needRes', STONE);
-            unit.set('purpose', {left:res.left, id:res.id, top:res.top, action:"transport", unitType:STONE, now: "goto"})
+        if (res.radius > 3) {
+            unit.resource = null;
+            unit.set('task', {
+                left: res.left,
+                id: res.id,
+                top: res.top,
+                action: "transport",
+                unitType: STONE,
+                now: "goto"
+            })
             moveTo(unit.id, res.left, res.top);
         }
-        document.getElementById("des2").innerText = res.radius;
+        document.getElementById("des2").innerText = res.radius.toString().charAt(0);
         return res;
     } else {
         var res = new fabric.Circle({
@@ -24,9 +27,9 @@ function addProduct(unit) {
             originX: 'center',
             originY: 'center',
             stroke: 'LIGHTSALMON',
-            unitType: unit.needRes+10,
+            unitType: unit.task.unitType + 10,
             // centeredRotation: true,
-            fill: getColor(unit.needRes),
+            fill: getColor(unit.task.unitType),
             radius: 1,
             lockMovementX: true,
             lockMovementY: true,
@@ -61,13 +64,12 @@ function getColor(unitType) {
     }
 }
 
-function getNearResource(unit, type) {
+function getNearResource(unit) {
     let res = 1000;
     let result = null;
     canvas.getObjects().forEach(it => {
-        if (it.unitType === type) {
+        if (it.unitType === unit.task.unitType) {
             let dist = getDist(unit.left, unit.top, it.left, it.top);
-            console.log("dist", dist);
             if (dist < res) {
                 res = dist;
                 result = it;
@@ -78,4 +80,15 @@ function getNearResource(unit, type) {
         }
     });
     return result;
+}
+
+function sumRes(me) {
+    if (tact % 20 === 0) {
+        let intersected = intersectWith(me);
+        if (intersected !== null) {
+            if(intersected.id>19999&&intersected.id<21001){
+            canvas.remove(intersected);
+            me.set('radius',  Math.sqrt((3 * (me.radius) * (me.radius) + 3 * (intersected.radius) * (intersected.radius)   )    / 3))}
+        }
+    }
 }

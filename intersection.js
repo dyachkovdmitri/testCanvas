@@ -5,6 +5,10 @@ function onIntersect(it, unit) {
     if(unit.id===345){   // это след
         return false
     }
+
+    if(unit.fill==='white'){   // это дом
+        return false
+    }
     if(it.id>19999&&it.id<21001&&unit.id>19999&&unit.id<21001){   // это ресурсы
        return true;
     }

@@ -4,6 +4,11 @@ var canvasContext = {
 };
 var canvas;
 
+function un (id) {
+    let res = getObjectById(id);
+    return res.task
+}
+
 function getObjectById(id) {
     let res = null;
     canvas.getObjects().forEach(it => {
@@ -12,7 +17,6 @@ function getObjectById(id) {
             res = it;
             return;
         }
-
     });
     return res;
 }

@@ -36,8 +36,8 @@ function init() {
     initContext();
     nature.createGrass(5);
     work(addWorker(1, "green", 100, 400, 4), ROCK);
-    work(addWorker(2, "green", 100, 400, 4), ROCK);
-    work(addWorker(3, "green", 100, 400, 4), ROCK);
+     work(addWorker(2, "green", 100, 400, 6), GRASS);
+    // work(addWorker(3, "green", 100, 400, 4), ROCK);
     addUnit(1001, "gray", 200, 149, 50, true);
     lastTime = Date.now();
     main();
@@ -52,7 +52,7 @@ function update(dt) {
 function renderMoving() {
     tact++;
     if (tact % 150 === 0) {
-        nature.createFireRain(1);
+      //  nature.createFireRain(1);
     }
 
     let sum = false;

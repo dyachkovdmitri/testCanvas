@@ -1,6 +1,5 @@
 
 
-
 function addUnit(id, color, left, top, radius, intersects) {
     let type;
     if (color == 'gray') {
@@ -147,7 +146,8 @@ function transportUnit(it) {
                 product.set('left', it.left);
                 it.set('angle', 90);
                 it.task.now = "gotoBase";
-                moveTo(it.id, 100, 111)
+                let home = getNearestHome(it);
+                moveTo(it.id, home[0], home[1])
             }
         } else if (it.task.now === "gotoBase" && canvasContext.destinations.get(it.id) === undefined) {
             it.task.now = "goto";

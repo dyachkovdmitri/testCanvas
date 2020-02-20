@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa530661-b9ec-44f4-9b15-99faf2f25e5e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tasks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/homes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/canvasContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/canvasContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enemy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input.js" beforeDir="false" afterPath="$PROJECT_DIR$/input.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/intersection.js" beforeDir="false" afterPath="$PROJECT_DIR$/intersection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nature.js" beforeDir="false" afterPath="$PROJECT_DIR$/nature.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/resource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/traectory.js" beforeDir="false" afterPath="$PROJECT_DIR$/traectory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unit.js" beforeDir="false" afterPath="$PROJECT_DIR$/unit.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -100,7 +97,7 @@
       <workItem from="1582008177730" duration="11799000" />
       <workItem from="1582093696637" duration="18931000" />
       <workItem from="1582179962784" duration="3418000" />
-      <workItem from="1582198339931" duration="1208000" />
+      <workItem from="1582198339931" duration="4018000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1579276443811</created>
@@ -242,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581951523043</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="small fixes">
+      <created>1582217350803</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1582217350803</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,7 +341,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/unit.js</url>
-          <line>92</line>
+          <line>91</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

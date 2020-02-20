@@ -1,13 +1,4 @@
-var ROCK = 0;
-var TREE = 1;
-var RIVER = 2;
-var GOLD = 4;
-var METALL = 5;
-var ENEMY = 6;
-var FRIEND = 7;
-var GRASS = 8;
-var STONE = 10;
-var WOOD = 11;
+
 
 
 function addUnit(id, color, left, top, radius, intersects) {
@@ -20,6 +11,9 @@ function addUnit(id, color, left, top, radius, intersects) {
     }
     if (color == 'brown') {
         type = TREE;
+    }
+    if (color == 'aquamarine') {
+        type = GRASS;
     }
 
     var unit = new fabric.Circle({
@@ -92,6 +86,10 @@ function workUnit(it) {
             if (tact % 2 === 0) {
                 let resource = getObjectById(it.task.id);
                 addProduct(it);
+                if(resource==null){
+                    findAndMine(it);
+                    return;
+                }
                 let newR = Math.sqrt((3 * resource.radius * resource.radius - 1) / 3);
                 if (newR > 0) {
                     resource.set('radius', newR);
@@ -104,27 +102,32 @@ function workUnit(it) {
         }
 
         if (it.task.unitType !== null && it.task.unitType !== undefined) {
-            let resource = getObjectById(it.task.id);
-            if (resource === null || resource === undefined) {
-                resource = getNearResource(it);//todo hardcode ROCK
-                if (resource !== null) {
-                    moveTo(it.id, resource.left, resource.top);
-                    it.set('task', {
-                        left: resource.left,
-                        id: resource.id,
-                        top: resource.top,
-                        action: "transport",
-                        unitType: ROCK,
-                        now: "goto"
-                    });
-                } else {
-                    console.log("STRANGE PLACE");
-                    it.task.now = "mine";
-                }
-            }
+            findAndMine(it)
         }
 
 }}
+
+function findAndMine(it){
+    let resource = getObjectById(it.task.id);
+    if (resource === null || resource === undefined) {
+        resource = getNearResource(it);
+        if (resource !== null) {
+            moveTo(it.id, resource.left, resource.top);
+            it.set('task', {
+                left: resource.left,
+                id: resource.id,
+                top: resource.top,
+                action: "transport",
+                unitType: it.task.unitType,
+                now: "goto"
+            });
+        } else {
+            console.log("STRANGE PLACE");
+            it.task.now = "mine";
+        }
+    }
+}
+
 
 function shootUnit(it) {
 
@@ -137,7 +140,7 @@ function attackUnit(it) {
 function transportUnit(it) {
     if (it.task !== undefined && it.task !== null && it.task.action === "transport") { // now - goto, takeRes, gotoBase,
         if (it.task.now === "takeRes") {
-            console.log("takeRES", it);
+        //    console.log("TAKERES", it);
             let product = getObjectById(it.task.id);
             if (product !== null) {
                 product.set('top', it.top - 5);

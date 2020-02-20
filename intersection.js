@@ -2,7 +2,9 @@ function onIntersect(it, unit) {
     if(it.id===9999){   // это указатель
         return true
     }
-
+    if(unit.id===345){   // это след
+        return false
+    }
     if(it.id>19999&&it.id<21001&&unit.id>19999&&unit.id<21001){   // это ресурсы
        return true;
     }
@@ -16,12 +18,18 @@ function onIntersect(it, unit) {
         }
         return false
     }
-   // console.log(it);
+
     if (it.task !== undefined && it.task !== null && it.task.unitType === unit.unitType) {
         it.task.now = "mine";
         it.task.id = unit.id;
         canvasContext.destinations.delete(it.id);
         return false;
     }
+
+    if (unit.unitType === GRASS ) {// проход сквозь траву
+        return false
+    }
+
+
     return true
 }

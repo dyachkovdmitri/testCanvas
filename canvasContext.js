@@ -56,14 +56,14 @@ function initContext() {
         let point = {id: 9999, left: left, top: top, radius: 1};
         let intersected = intersectWith(point);
         if (intersected !== null) {
-            if (intersected.unitType === ROCK) {
-             unit.set('task', {left:intersected.left, id:intersected.id, top:intersected.top, action:"transport", unitType:ROCK, now: "goto"});
+            if (intersected.unitType!==undefined) {
+             unit.set('task', {left:intersected.left, id:intersected.id, top:intersected.top, action:"transport", unitType:intersected.unitType, now: "goto"});
             }
 
-            if (intersected.unitType === STONE) {
-                //unit.set('needRes', STONE);
-                unit.set('task', {left:intersected.left, id:intersected.id, top:intersected.top, action:"transport", unitType:STONE, now: "goto"})
-            }
+            // if (intersected.unitType === STONE) {
+            //     //unit.set('needRes', STONE);
+            //     unit.set('task', {left:intersected.left, id:intersected.id, top:intersected.top, action:"transport", unitType:STONE, now: "goto"})
+            // }
         }
     }
 }

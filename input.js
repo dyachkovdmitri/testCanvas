@@ -20,11 +20,18 @@
                 // Convert ASCII codes to letters
                 key = String.fromCharCode(code);
         }
-
         pressedKeys[key] = status;
     }
 
     document.addEventListener('keydown', function(e) {
+        if(e.keyCode===32){
+            let unit = getObjectById(selectedUnits[0]);
+            let base = addUnit(5001,'white',unit.left,unit.top,20,true);
+            base.set("fill","white");
+            base.set("stroke", "gray");
+            base.set("id", 5001);
+            base.set('opacity',0.5);
+            base.set("radius", 20);}
         setKey(e, true);
     });
 

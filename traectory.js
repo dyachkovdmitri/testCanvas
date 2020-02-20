@@ -17,21 +17,36 @@ var dirDic = {
     5: [-1, 1],
     6: [-1, 0],
     7: [-1, -1],
-    11: [0, 0]
+    20: [0, 0]
 };
 
 
-
 function moveUnit(it) {
+    // console.log("steps", it.failed);
+
     if (canvasContext.destinations.has(it.id)) {
         if (it.id > 0 && it.id < 1000) {
             if (!tryMove(it)) {
+                if (it.failed !== undefined) {
+                    it.failed.push(it.left);
+                    it.failed.push(it.top)
+                }
                 if (!tryMove(it, 1)) {
                     if (!tryMove(it, 2)) {
                         if (!tryMove(it, 3)) {
                             if (!tryMove(it, -1)) {
-                                if (tryMove(it, -2)) {
-                                    tryMove(it, -3)
+                                if (!tryMove(it, -2)) {
+                                    if (!tryMove(it, -3)) {
+                                        // if (it.failed === undefined) {
+                                        //     it.failed = [it.left, it.top]
+                                        // } else {
+                                        //     it.failed.push(it.left);
+                                        //     it.failed.push(it.top)
+                                        // }
+                                        //
+                                        // tryMove(it, 4);
+
+                                    }
                                 }
                             }
                         }
@@ -43,31 +58,65 @@ function moveUnit(it) {
 }
 
 
-
 function tryMove(unit, changeDirection) {
     if (changeDirection === undefined) {
         changeDirection = 0
-    } else {
     }
-    var direction = borderDirection(getDirection(unit) + changeDirection);
+ //   if(unit.okSteps===undefined){unit.okSteps=0;}
+    var direction = limitDirection(getDirection(unit) + changeDirection);
+
+    // console.log(changeDirection);
+   //  console.log(direction);
+    // console.log(getDirection(unit));
     moveDirect(unit, direction);
-    let enemy = enemyInRange(unit);
-    if (enemy != null) {
-        if (shoot(unit, 200, enemy.left, enemy.top)) {
-            //  canvas.remove(enemy);
-        }
-    }
+    // let enemy = enemyInRange(unit);
+    // if (enemy != null) {
+    //     if (shoot(unit, 200, enemy.left, enemy.top)) {
+    //         //  canvas.remove(enemy);
+    //     }
+    // }
+
+
+    // if (unit.failed !== undefined) {
+    //     console.log("number failed steps", unit.failed.length);
+    // }
+    // if (checkFailed(unit)) {
+    //     unit.okSteps=0;
+    //     //  console.log("ALREADY BE HERE ", direction);
+    //     reverse(unit, direction);
+    //  //   addUnit(345, "red", unit.left, unit.top, 0.3);
+    //     return false;
+    // }
     if (intersectsAll(unit)) {
+   //     unit.okSteps=0;
+        //console.log("INTERSECTED ", direction);
         reverse(unit, direction);
+      //  addUnit(345, "blue", unit.left, unit.top, 0.3);
         return false;
-    } else return true;
+    } else {
+  //      unit.okSteps++;
+        //addUnit(345, 'yellow', unit.left, unit.top, 0.3);
+        return true;
+    }
 }
 
+function checkFailed(me) {
+    if(me.okSteps>3){me.failed === undefined; return false;}
+    if (me.failed === undefined) return false;
+    if (me.failed.length===350){
+        me.failed=me.failed.splice(0,50)
+    }
+    for (let i = 0; i < me.failed.length - 1; i = i + 2) {
+        if (me.failed[i] === me.left && me.failed[i + 1] === me.top) {
+            return true;
+        }
+    }
+    return false;
+}
 
 
 function getDirection(it) {
     var destination = canvasContext.destinations.get(it.id);
-
     if (destination != null) {
         var objectX = it.left;
         var objectY = it.top;
@@ -78,13 +127,14 @@ function getDirection(it) {
         var realDist = getDist(objectX, objectY, destinationX, destinationY);
         var oldDist = destination[3];
         destination = [destinationX, destinationY, step, oldDist];
-                if (step % 100 === 0) {//степень упоротости, как долго будет пытаться идти к цели
+        if (step % 400 === 0) {//степень упоротости, как долго будет пытаться идти к цели
             if (Math.abs(realDist - oldDist) < 2) {
                 canvasContext.destinations.delete(it.id);
-               // console.log('losted');
+                // console.log('losted');
                 // it.fill = 'red';
-                return 11;
+                return 20;
             }
+
             destination = [destinationX, destinationY, step, realDist];
         }
         canvasContext.destinations.set(it.id, destination);
@@ -99,10 +149,10 @@ function getDirection(it) {
         if (objectX > destinationX && objectY > destinationY) return 7;
         if (objectX === destinationX && objectY === destinationY) {
             canvasContext.destinations.delete(it.id);
-            return 11
+            return 20
         }
     }
-    return 11
+    return 20
 }
 
 function intersect(it, unit) {
@@ -123,7 +173,7 @@ function getDist(x1, y1, x2, y2) {
 function enemyInRange(unit) {
     var isi = null;
     canvas.getObjects().forEach(it => {
-        if (it.id != unit.id) {
+        if (it.id !== unit.id) {
             if (inRange(unit.radius, unit.left, unit.top, it.radius, it.left, it.top)) {
                 if (it.fill === "red") {
                     //   console.log("ENEMY");//todo break;
@@ -151,7 +201,7 @@ function intersectsAll(unit) {
 function intersectWith(unit) {
     var isi = null;
     canvas.getObjects().forEach(it => {
-        if (it.id != unit.id) {
+        if (it.id !== unit.id) {
             if (intersect(unit, it)) {
                 isi = it
             }
@@ -160,29 +210,36 @@ function intersectWith(unit) {
     return isi;
 }
 
-function borderDirection(direction) {
+function limitDirection(direction) {
     if (direction === 8) {
-        direction = 0
+        return 0
     }
     if (direction === 9) {
-        direction = 1
+        return 1
     }
     if (direction === 10) {
-        direction = 2
+        return 2
+    }
+    if (direction === 11) {
+        return 3
+    }
+    if (direction === 12) {
+        return 4
     }
 
     if (direction === -1) {
-        direction = 7
+        return 7
     }
 
     if (direction === -2) {
-        direction = 6
+        return 6
     }
     if (direction === -3) {
-        direction = 5
+        return 5
     }
-    if (direction > 10) {
-        direction = 11
+    if (direction >20) {
+        return 20
     }
+
     return direction;
 }

@@ -50,7 +50,7 @@ function changeSelection(x, y) {
 }
 
 function saveSelectionField(x, y) {
-    console.log("UP");
+    //console.log("UP");
     canvas.remove(selection);
     selection = undefined;
     let left;

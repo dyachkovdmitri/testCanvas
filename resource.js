@@ -11,57 +11,37 @@ var WOOD = 11;
 var FOOD = 18;
 var WATER = 12;
 
-function addProduct(unit) {
-    if (unit.resource !== null && unit.resource !== undefined) {
-        let res = getObjectById(unit.resource);//todo
-        if (res !== null) {
-            res.set('radius', res.radius + 0.02);
-            //console.log(res.radius);
-            if (res.radius > 3) {
-                unit.resource = null;
-                unit.set('task', {
-                    left: res.left,
-                    id: res.id,
-                    top: res.top,
-                    action: "transport",
-                    unitType: unit.task.unitType + 10,
-                    now: "goto"
-                });
-                moveTo(unit.id, res.left, res.top);
+function addSwag(unit) {
+    if (unit.task.swag !== null && unit.task.swag !== undefined) {
+        let swag = getObjectById(unit.task.swag);
+        if (swag !== null) {
+            if (swag.radius > 3) {
+                unit.task.now = "takeRes";
+                return;
             }
-            document.getElementById("des2").innerText = res.radius.toString().charAt(0);
+            it.set('angle', (tact % 72) * 5);
+            swag.set('radius', swag.radius + 0.02);
             return res;
         }
     } else {
-        var res = new fabric.Circle({
-            left: unit.left,
-            top: unit.top,
-            id: randomInt(20000, 21000),
-            originX: 'center',
-            originY: 'center',
-            stroke: 'LIGHTSALMON',
-            unitType: unit.task.unitType + 10,
-            // centeredRotation: true,
-            fill: getColor(unit.task.unitType),
-            radius: 1,
-            lockMovementX: true,
-            lockMovementY: true,
-            lockRotation: true,
-            lockScalingY: true,
-            lockScalingX: true
-        });
-        while (true) {
-            if (intersectsAll(unit)) {
-                unit.left += radius + 1;
-            } else break;
-        }
-        res.hasControls = false;
-        addNear(res);
-        unit.resource = res.id;
-        canvas.add(res);
-        // rockResources.push(res.id, res);
-        return res;
+        createSwag(unit);
     }
+}
+
+function createSwag(unit) {
+    var swag = new fabric.Circle({
+        left: unit.left,
+        top: unit.top - 5,
+        id: randomInt(20000, 21000),
+        stroke: 'LIGHTSALMON',
+        unitType: unit.task.unitType + 10,
+        // centeredRotation: true,
+        fill: getColor(unit.task.unitType),
+        radius: 1,
+    });
+    lock(swag);
+    unit.task.swag = swag.id;
+    return swag;
 }
 
 function getColor(unitType) {
@@ -99,7 +79,7 @@ function sumRes(me) {
     if (tact % 20 === 0) {
         let intersected = intersectWith(me);
         if (intersected !== null) {
-           // console.log("INTERSECTED", intersected.fill, me.fill);
+            // console.log("INTERSECTED", intersected.fill, me.fill);
             if (intersected.id > 19999 && intersected.id < 21001) {
                 if (intersected.unitType === me.unitType) {
                     // console.log("SUM", intersected.fill, me.fill)
@@ -113,4 +93,14 @@ function sumRes(me) {
         }
     }
     return false;
+}
+
+function reduceRes(resource) {
+    let newR = Math.sqrt((3 * resource.radius * resource.radius - 1) / 3);
+    if (newR > 0) {
+        resource.set('radius', newR);
+    } else {
+        it.set('angle', 0);
+        canvas.remove(resource);
+    }
 }

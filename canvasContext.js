@@ -1,7 +1,7 @@
-var canvasContext = {
-    destinations: new Map(),
-    units: new Map()
-};
+// var canvasContext = {
+//     destinations: new Map(),
+//     units: new Map()
+// };
 var canvas;
 
 function un (id) {
@@ -56,18 +56,15 @@ function initContext() {
     );
 
     function makePurpose(unit, left, top) {
-        unit.task=null;
         let point = {id: 9999, left: left, top: top, radius: 1};
         let intersected = intersectWith(point);
+        console.log("GOTO");
         if (intersected !== null) {
             if (intersected.unitType!==undefined) {
-             unit.set('task', {left:intersected.left, id:intersected.id, top:intersected.top, action:"transport", unitType:intersected.unitType, now: "goto"});
+                unit.set('task', {left:intersected.left, id:intersected.id, top:intersected.top, unitType:intersected.unitType, now: "goto"});
             }
-
-            // if (intersected.unitType === STONE) {
-            //     //unit.set('needRes', STONE);
-            //     unit.set('task', {left:intersected.left, id:intersected.id, top:intersected.top, action:"transport", unitType:STONE, now: "goto"})
-            // }
+        } else{
+            unit.set('task', {left:left, top:top, now: "goto"});
         }
     }
 }

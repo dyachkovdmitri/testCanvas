@@ -24,29 +24,15 @@ var dirDic = {
 function moveUnit(it) {
     // console.log("steps", it.failed);
 
-    if (canvasContext.destinations.has(it.id)) {
-        if (it.id > 0 && it.id < 1000) {
-            if (!tryMove(it)) {
-                if (it.failed !== undefined) {
-                    it.failed.push(it.left);
-                    it.failed.push(it.top)
-                }
-                if (!tryMove(it, 1)) {
-                    if (!tryMove(it, 2)) {
-                        if (!tryMove(it, 3)) {
-                            if (!tryMove(it, -1)) {
-                                if (!tryMove(it, -2)) {
-                                    if (!tryMove(it, -3)) {
-                                        // if (it.failed === undefined) {
-                                        //     it.failed = [it.left, it.top]
-                                        // } else {
-                                        //     it.failed.push(it.left);
-                                        //     it.failed.push(it.top)
-                                        // }
-                                        //
-                                        // tryMove(it, 4);
-
-                                    }
+    // if (it.task.now === 'goto') {
+    if (it.id > 0 && it.id < 1000) {
+        if (!tryMove(it)) {
+            if (!tryMove(it, 1)) {
+                if (!tryMove(it, 2)) {
+                    if (!tryMove(it, 3)) {
+                        if (!tryMove(it, -1)) {
+                            if (!tryMove(it, -2)) {
+                                if (!tryMove(it, -3)) {
                                 }
                             }
                         }
@@ -55,6 +41,7 @@ function moveUnit(it) {
             }
         }
     }
+    //  }
 }
 
 
@@ -62,11 +49,11 @@ function tryMove(unit, changeDirection) {
     if (changeDirection === undefined) {
         changeDirection = 0
     }
- //   if(unit.okSteps===undefined){unit.okSteps=0;}
+    //   if(unit.okSteps===undefined){unit.okSteps=0;}
     var direction = limitDirection(getDirection(unit) + changeDirection);
 
     // console.log(changeDirection);
-   //  console.log(direction);
+    //  console.log(direction);
     // console.log(getDirection(unit));
     moveDirect(unit, direction);
     // let enemy = enemyInRange(unit);
@@ -88,23 +75,26 @@ function tryMove(unit, changeDirection) {
     //     return false;
     // }
     if (intersectsAll(unit)) {
-   //     unit.okSteps=0;
+        //     unit.okSteps=0;
         //console.log("INTERSECTED ", direction);
         reverse(unit, direction);
-      //  addUnit(345, "blue", unit.left, unit.top, 0.3);
+        //  addUnit(345, "blue", unit.left, unit.top, 0.3);
         return false;
     } else {
-  //      unit.okSteps++;
+        //      unit.okSteps++;
         //addUnit(345, 'yellow', unit.left, unit.top, 0.3);
         return true;
     }
 }
 
 function checkFailed(me) {
-    if(me.okSteps>3){me.failed === undefined; return false;}
+    if (me.okSteps > 3) {
+        me.failed === undefined;
+        return false;
+    }
     if (me.failed === undefined) return false;
-    if (me.failed.length===350){
-        me.failed=me.failed.splice(0,50)
+    if (me.failed.length === 350) {
+        me.failed = me.failed.splice(0, 50)
     }
     for (let i = 0; i < me.failed.length - 1; i = i + 2) {
         if (me.failed[i] === me.left && me.failed[i + 1] === me.top) {
@@ -116,42 +106,44 @@ function checkFailed(me) {
 
 
 function getDirection(it) {
-    var destination = canvasContext.destinations.get(it.id);
-    if (destination != null) {
-        var objectX = it.left;
-        var objectY = it.top;
-        var destinationX = destination[0];
-        var destinationY = destination[1];
+    // var destination = canvasContext.destinations.get(it.id);
+    //if (destination != null) {
+    var objectX = it.left;
+    var objectY = it.top;
+    var destinationX = it.task.left;
+    var destinationY = it.task.top;
 
-        var step = destination[2] + 1;
-        var realDist = getDist(objectX, objectY, destinationX, destinationY);
-        var oldDist = destination[3];
-        destination = [destinationX, destinationY, step, oldDist];
-        if (step % 400 === 0) {//степень упоротости, как долго будет пытаться идти к цели
-            if (Math.abs(realDist - oldDist) < 2) {
-                canvasContext.destinations.delete(it.id);
-                // console.log('losted');
-                // it.fill = 'red';
-                return 20;
-            }
+    it.task.step++;
+    let dist = getDist(objectX, objectY, destinationX, destinationY);
+    var oldDist = it.task.dist;
+    //  destination = [destinationX, destinationY, step, oldDist];
+    if (it.task.step % 100 === 0) {//степень упоротости, как долго будет пытаться идти к цели
+        if (Math.abs(realDist - oldDist) < 2) {
+            it.task.left = null;
+            it.task.top = null;
+            it.task.now = 'stay';
+            console.log("STAY");
+            return 20;
+        }
 
-            destination = [destinationX, destinationY, step, realDist];
-        }
-        canvasContext.destinations.set(it.id, destination);
-        //console.log("go to ", destination, getDist(objectX, objectY, destinationX, destinationY));
-        if (objectX === destinationX && objectY > destinationY) return 0;
-        if (objectX < destinationX && objectY > destinationY) return 1;
-        if (objectX < destinationX && objectY === destinationY) return 2;
-        if (objectX < destinationX && objectY < destinationY) return 3;
-        if (objectX === destinationX && objectY < destinationY) return 4;
-        if (objectX > destinationX && objectY < destinationY) return 5;
-        if (objectX > destinationX && objectY === destinationY) return 6;
-        if (objectX > destinationX && objectY > destinationY) return 7;
-        if (objectX === destinationX && objectY === destinationY) {
-            canvasContext.destinations.delete(it.id);
-            return 20
-        }
+        //  destination = [destinationX, destinationY, step, realDist];
     }
+    it.task.dist = dist;
+    //console.log("go to ", destination, getDist(objectX, objectY, destinationX, destinationY));
+    if (objectX === destinationX && objectY > destinationY) return 0;
+    if (objectX < destinationX && objectY > destinationY) return 1;
+    if (objectX < destinationX && objectY === destinationY) return 2;
+    if (objectX < destinationX && objectY < destinationY) return 3;
+    if (objectX === destinationX && objectY < destinationY) return 4;
+    if (objectX > destinationX && objectY < destinationY) return 5;
+    if (objectX > destinationX && objectY === destinationY) return 6;
+    if (objectX > destinationX && objectY > destinationY) return 7;
+    if (objectX === destinationX && objectY === destinationY) {
+        it.task.now = 'stay';
+        it.task.step = 0;
+        return 20
+    }
+    //  }
     return 20
 }
 
@@ -211,35 +203,14 @@ function intersectWith(unit) {
 }
 
 function limitDirection(direction) {
-    if (direction === 8) {
-        return 0
+    switch (direction) {
+        case (direction > 20):
+            return 20;
+        case (direction > 7):
+            return direction - 8;
+        case (direction < 0):
+            return direction + 8
+        default:
+            return direction;
     }
-    if (direction === 9) {
-        return 1
-    }
-    if (direction === 10) {
-        return 2
-    }
-    if (direction === 11) {
-        return 3
-    }
-    if (direction === 12) {
-        return 4
-    }
-
-    if (direction === -1) {
-        return 7
-    }
-
-    if (direction === -2) {
-        return 6
-    }
-    if (direction === -3) {
-        return 5
-    }
-    if (direction >20) {
-        return 20
-    }
-
-    return direction;
 }

@@ -1,3 +1,5 @@
+var FIRERAIN = 21001;
+
 let nature = {
     createRocks(number, radius, maxSize) {
         for (var j = 0; j < number; j++) {
@@ -16,7 +18,7 @@ let nature = {
             let nextLeft = randomInt(100, 1800);
             let minTop = randomInt(0, 200);
          //   console.log(j);
-            addUnit(21001, 'orange', nextLeft, minTop,randomInt(1,3))
+            addUnit(FIRERAIN, 'orange', nextLeft, minTop,randomInt(1,3))
         }
     },
 

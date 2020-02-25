@@ -36,7 +36,7 @@ function init() {
     initContext();
     nature.createGrass(5);
     work(addWorker(1, "green", 100, 400, 4), ROCK);
-     work(addWorker(2, "green", 100, 400, 6), GRASS);
+   // work(addWorker(2, "green", 100, 400, 6), GRASS);
     // work(addWorker(3, "green", 100, 400, 4), ROCK);
     addUnit(1001, "gray", 200, 149, 50, true);
     lastTime = Date.now();
@@ -51,9 +51,9 @@ function update(dt) {
 
 function renderMoving() {
     tact++;
-    if (tact % 150 === 0) {
-      //  nature.createFireRain(1);
-    }
+    // if (tact % 150 === 0) {
+    //   //  nature.createFireRain(1);
+    // }
 
     let sum = false;
     //console.log(canvasContext.destinations);
@@ -61,20 +61,22 @@ function renderMoving() {
         it => {
             try {
                 if (it.id < 900) {
+                    doTask(it);
+
                     // console.log(tact, it.task);
-                    workUnit(it);
-                    //  console.log(tact, it.task);
-                    moveUnit(it);
-                    //  console.log(tact, it.task);
-                    transportUnit(it);
-                    shootUnit(it);
-                    attackUnit(it);
+                    // workUnit(it);
+                    // //  console.log(tact, it.task);
+                    // moveUnit(it);
+                    // //  console.log(tact, it.task);
+                    // transportUnit(it);
+                    // shootUnit(it);
+                    // attackUnit(it);
                     select(it);
                 } else if (!sum && it.id > 19999 && it.id < 21001) {
                     // console.log(it.id);
                     sum = sumRes(it);
                     // sum = true;
-                } else if (it.id === 21001) {
+                } else if (it.id === FIRERAIN) {
                     let intersected = intersectWith(it);
                     if (intersected != null && intersected.fill === 'gray') {
                         canvas.remove(it)

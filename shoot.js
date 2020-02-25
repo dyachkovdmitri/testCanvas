@@ -53,16 +53,8 @@ function addLaser(left, top) {
         // originY: 'center',
         fill: 'red',
         radius: 1,
-        lockMovementX: true,
-        lockMovementY: true,
-        lockRotation: true,
-        lockScalingY: true,
-        lockScalingX: true
     });
-    unit.hasControls = false;
-    // rect.on('selected', function () {
-    // });
-    canvas.add(unit);
+    lock(unit);
     return intersectWith(unit);
 }
 

@@ -1,6 +1,11 @@
 function moveDirect(unit, direction) {
-    unit.left += dirDic[direction][0];
-    unit.top += dirDic[direction][1];
+    try {
+        unit.left += dirDic[direction][0];
+        unit.top += dirDic[direction][1];
+    } catch (e) {
+        console.log(e);
+        console.log(direction);
+    }
 }
 
 function reverse(unit, direction) {
@@ -118,11 +123,13 @@ function getDirection(it) {
     var oldDist = it.task.dist;
     //  destination = [destinationX, destinationY, step, oldDist];
     if (it.task.step % 100 === 0) {//степень упоротости, как долго будет пытаться идти к цели
-        if (Math.abs(realDist - oldDist) < 2) {
+
+        if (Math.abs(dist - oldDist) < 2) {
+
             it.task.left = null;
             it.task.top = null;
             it.task.now = 'stay';
-            console.log("STAY");
+            console.log("STAY", dist,oldDist);
             return 20;
         }
 
@@ -203,14 +210,14 @@ function intersectWith(unit) {
 }
 
 function limitDirection(direction) {
-    switch (direction) {
-        case (direction > 20):
-            return 20;
-        case (direction > 7):
-            return direction - 8;
-        case (direction < 0):
-            return direction + 8
-        default:
-            return direction;
+    if (direction > 12) {
+        return 20
     }
+    if (direction > 7) {
+        return direction - 8
+    }
+    if (direction < 0) {
+        return direction + 8;
+    }
+    return direction;
 }

@@ -9,6 +9,7 @@ function doTask(unit) {
     if (unit.task !== undefined && unit.task != null) {
         switch (unit.task.now) {
             case('stay'):
+                checkLazy(unit);
                 break;
             case "findRes":
                 findAndMine(unit);
@@ -50,17 +51,35 @@ function doTask(unit) {
             it.set('angle', 90);
            // console.log("GOTOBASE");
             it.task.now = "goWithResource";
-            let home = getNearestHome(it);
-            moveTo(it.id, home[0], home[1])
+            let homes = getNearestHome(it);
+            it.task.left = homes[0];
+            it.task.top = homes[1];
+        }
+    }
+    function checkLazy(it) {
+        if (it.task.id!=null){
+            let res = getObjectById(it.task.id);
+            if(res!==undefined&&res!==null){
+            it.task.now='goto';
+            it.task.left=res.left;
+            it.task.top=res.top;
+            it.angle=0;
+            it.task.swag=null;}
         }
     }
 
     function goWithResource(it) {
-        let swag = getObjectById(it.task.id);
-        if(swag==null){console.log("ERROR CANT FIND RESOURCE")}
+        if(it.task.swag===null){
+
+        }
+        let swag = getObjectById(it.task.swag);
         if (swag !== null) {
             swag.set('top', it.top - 5);
             swag.set('left', it.left);
+        } else {
+            console.log("ERROR CANT FIND RESOURCE ", it.task);
+            it.task.now='findRes';
+            it.task.swag=null;
         }
         moveUnit(it);
     }

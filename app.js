@@ -34,11 +34,21 @@ function randomInt(min, max) {
 
 function init() {
     initContext();
-    nature.createGrass(5);
+    nature.createRocks(10, 30, 20);
+   // nature.createGrass(5);
     work(addWorker(1, "green", 100, 400, 4), ROCK);
-   // work(addWorker(2, "green", 100, 400, 6), GRASS);
-    // work(addWorker(3, "green", 100, 400, 4), ROCK);
-    addUnit(1001, "gray", 200, 149, 50, true);
+    work(addWorker(2, "green", 150, 400, 4), ROCK);
+    // work(addWorker(3, "green", 200, 400, 4), ROCK);
+    // work(addWorker(4, "green", 100, 100, 4), ROCK);
+    // work(addWorker(5, "green", 150, 200, 4), ROCK);
+    // work(addWorker(6, "green", 200, 300, 4), ROCK);
+    // work(addWorker(7, "green", 600, 400, 4), ROCK);
+    // work(addWorker(8, "green", 750, 400, 4), ROCK);
+    // work(addWorker(9, "green", 500, 400, 4), ROCK);
+    // work(addWorker(10, "green", 800, 100, 4), ROCK);
+    // work(addWorker(11, "green", 450, 200, 4), ROCK);
+    // work(addWorker(12, "green", 60, 300, 4), GRASS);
+    // addUnit(1001, "gray", 200, 149, 50, true);
     lastTime = Date.now();
     main();
 }
@@ -79,14 +89,17 @@ function renderMoving() {
                 } else if (it.id === FIRERAIN) {
                     let intersected = intersectWith(it);
                     if (intersected != null && intersected.fill === 'gray') {
-                        canvas.remove(it)
+                        canvas.remove(it);
+                        console.log("removed by firerain1",it.id)
                     }
                     if (intersected != null && intersected.fill === 'green') {
                         canvas.remove(it);
                         canvas.remove(intersected);
+                        console.log("removed by firerain2",it.id)
                     }
                     if (it.top > randomInt(400, 4000) && it.top < randomInt(600, 700)) {
                         canvas.remove(it);
+                        console.log("removed by firerain3",it.id)
                     }
                     it.set('top', it.top + 1);
                 }

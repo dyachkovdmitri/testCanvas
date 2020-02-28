@@ -6,6 +6,7 @@ var GOLD = 4;
 var METALL = 5;
 var ENEMY = 6;
 var GRASS = 8;
+
 var STONE = 10;
 var WOOD = 11;
 var FOOD = 18;
@@ -19,9 +20,9 @@ function addSwag(unit) {
                 unit.task.now = "takeRes";
                 return;
             }
-            it.set('angle', (tact % 72) * 5);
+            unit.set('angle', (tact % 72) * 5);
             swag.set('radius', swag.radius + 0.02);
-            return res;
+            return swag;
         }
     } else {
         createSwag(unit);
@@ -82,12 +83,16 @@ function sumRes(me) {
             // console.log("INTERSECTED", intersected.fill, me.fill);
             if (intersected.id > 19999 && intersected.id < 21001) {
                 if (intersected.unitType === me.unitType) {
+                    let home = getNearestHome(me);
+                    if(getDist(me.left, me.top, home[0],home[1])<me.radius+20){//внутри дома
                     // console.log("SUM", intersected.fill, me.fill)
+                        console.log("removed",intersected.id);
                     canvas.remove(intersected);
                     me.set('radius', Math.sqrt((3 * (me.radius) * (me.radius) + 3 * (intersected.radius) * (intersected.radius)) / 3))
-                    return true;
-                } else {
-                    addNear(me);
+                   // me.id=me.unitType+9000;// стало богатсвом
+                    return true;}
+            } else {
+                   // addNear(me);
                 }
             }
         }
@@ -100,7 +105,8 @@ function reduceRes(resource) {
     if (newR > 0) {
         resource.set('radius', newR);
     } else {
-        it.set('angle', 0);
+     //   it.set('angle', 0);
+        console.log("removed res",resource.id);
         canvas.remove(resource);
     }
 }

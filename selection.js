@@ -45,12 +45,12 @@ function changeSelection(x, y) {
         let width = x - selectionX;
         let height = y - selectionY;
         addSelection(selectionX, selectionY, width, height);
-        document.getElementById("des2").innerText = width;
+
     }
 }
 
 function saveSelectionField(x, y) {
-    console.log("UP");
+    //console.log("UP");
     canvas.remove(selection);
     selection = undefined;
     let left;
